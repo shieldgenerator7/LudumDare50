@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         //Movement
         float horizontal = Input.GetAxisRaw("Horizontal");
-        rb2d.velocity = Vector2.right * horizontal;
+        rb2d.velocity = new Vector2(horizontal * moveSpeed, rb2d.velocity.y);
         //Aim weapon
         Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - pivotPoint.position;
         pivotPoint.up = dir;
