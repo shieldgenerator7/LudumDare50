@@ -34,7 +34,11 @@ public class PlayerController : MonoBehaviour
     {
         //Movement
         float horizontal = Input.GetAxisRaw("Horizontal");
-        rb2d.velocity = new Vector2(horizontal * moveSpeed, rb2d.velocity.y);
+        if (horizontal != 0 || prevHorizontal != 0)
+        {
+            rb2d.velocity = new Vector2(horizontal * moveSpeed, rb2d.velocity.y);
+        }
+        prevHorizontal = horizontal;
         //Flip body
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 scale = transform.localScale;
