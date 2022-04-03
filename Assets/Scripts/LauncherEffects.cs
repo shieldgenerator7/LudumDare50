@@ -34,7 +34,8 @@ public class LauncherEffects : MonoBehaviour
 
     void updateShake(float charge)
     {
-        shakeEffectIntensity = playerController.ChargePercent * maxShakeEffectIntensity;
+        float modifiedPercent = Mathf.Pow(2, playerController.ChargePercent) - 1;
+        shakeEffectIntensity = modifiedPercent * maxShakeEffectIntensity;
         if (charge <= 0)
         {
             shakeEffectIntensity = 0;
