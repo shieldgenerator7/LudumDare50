@@ -12,8 +12,6 @@ public class MonkeyController : MonoBehaviour
     public int maxMoveVotesSideways = 8;
     [Tooltip("When the monkey falls off, how high into the air he jumps first")]
     public float surpriseForce = 10;
-    [Tooltip("How close a vine must be to it in order to snap to it")]
-    public float branchRangeRequirement = 0.2f;
     [Header("Components")]
     public Transform graspPoint;
 
@@ -28,6 +26,7 @@ public class MonkeyController : MonoBehaviour
     {
         //RB2D
         rb2d = GetComponent<Rigidbody2D>();
+        rb2d.gravityScale = 0;
         //Move possibilities
         movePossibilities = new List<Vector2>();
         for (int i = 0; i < moveVotesUp; i++)
@@ -50,10 +49,7 @@ public class MonkeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentBranch)
-        {
-            rb2d.velocity = moveDir * moveSpeed;
-        }
+        rb2d.velocity = moveDir * moveSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -61,15 +57,17 @@ public class MonkeyController : MonoBehaviour
         Branch branch = collision.gameObject.GetComponent<Branch>();
         if (branch)
         {
-            checkChangeDirection(branch);
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        Branch branch = collision.gameObject.GetComponent<Branch>();
-        if (branch)
-        {
-            checkChangeDirection(branch);
+            if (!currentBranch)
+            {
+                //do nothing
+            }
+            else
+            {
+                //decide which direction to go
+                changeDirection();
+            }
+            //Snap onto the branch
+            graspBranchIfNeeded(branch);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -102,26 +100,6 @@ public class MonkeyController : MonoBehaviour
         GetComponents<Collider2D>().ToList().ForEach(coll => coll.isTrigger = true);
     }
 
-    private void checkChangeDirection(Branch branch)
-    {
-        //If the given branch is in range
-        Vector2 closestPoint = branch.GetComponent<Collider2D>().ClosestPoint(graspPoint.position);
-        if (Vector2.Distance(closestPoint, graspPoint.position) <= branchRangeRequirement)
-        {
-            if (!currentBranch)
-            {
-                //do nothing
-            }
-            else
-            {
-                //decide which direction to go
-                changeDirection();
-            }
-            //Snap onto the branch
-            graspBranchIfNeeded(branch);
-        }
-    }
-
     private void changeDirection()
     {
         int rand = Random.Range(0, movePossibilities.Count);
@@ -130,41 +108,20 @@ public class MonkeyController : MonoBehaviour
 
     private void graspBranchIfNeeded(Branch branch)
     {
-        //Check to see if branch should be switched
         if (!currentBranch)
         {
             currentBranch = branch;
-            moveInBranchDirectionIfNeeded(currentBranch);
-        }
-        else if (!currentBranch.canTraverseDirection(moveDir))
-        {
-            currentBranch = branch;
-        }
-        //Check to make sure you can traverse in your direction on the branch
-        if (currentBranch.canTraverseDirection(moveDir))
-        {
-            graspBranch(currentBranch);
-            rb2d.gravityScale = 0;
         }
         else
         {
-            currentBranch = null;
-            rb2d.gravityScale = 1;
-        }
-    }
-
-    void moveInBranchDirectionIfNeeded(Branch branch)
-    {
-        if (!movePossibilities.Any(v => branch.canTraverseDirection(v)))
-        {
-            movePossibilities.Add(Vector2.up);
-            movePossibilities.Add(Vector2.down);
-            movePossibilities.Add(Vector2.left);
-            movePossibilities.Add(Vector2.right);
-        }
-        while (!branch.canTraverseDirection(moveDir))
-        {
-            changeDirection();
+            if (currentBranch.canTraverseDirection(moveDir))
+            {
+                graspBranch(currentBranch);
+            }
+            else if (branch.canTraverseDirection(moveDir))
+            {
+                graspBranch(branch);
+            }
         }
     }
 
