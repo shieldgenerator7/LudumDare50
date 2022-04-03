@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Branch : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum Option
     {
-        
+        VERTICAL,
+        HORIZONTAL,
     }
+    public Option orientation;
 
-    // Update is called once per frame
-    void Update()
+    public bool canTraverseDirection(Vector2 dir)
     {
-        
+        switch (orientation)
+        {
+            case Option.VERTICAL:
+                return dir == Vector2.up || dir == Vector2.down;
+            case Option.HORIZONTAL:
+                return dir == Vector2.left || dir == Vector2.right;
+            default:
+                throw new System.NotImplementedException($"Unknown option: {orientation}");
+        }
     }
 }

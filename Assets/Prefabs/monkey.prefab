@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533978172578887044}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.208, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,9 +45,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.21355247}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.08656263
+  m_Radius: 0.02
 --- !u!1 &7533833176745291931
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,3 +200,4 @@ MonoBehaviour:
   maxMoveVotesDown: 5
   maxMoveVotesSideways: 8
   surpriseForce: 5
+  graspPoint: {fileID: 9099817254441172557}
