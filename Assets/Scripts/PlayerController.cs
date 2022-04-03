@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     public float ChargePercent => charge / maxCharge;
 
+    private bool readyToShoot = true;
     private float lastLaunchTime = 0;
     private float prevHorizontal = 0;
 
@@ -65,15 +66,19 @@ public class PlayerController : MonoBehaviour
         //Weapon charging
         if (Input.GetButton("Fire1"))
         {
-            Charge += chargePerSecond * Time.deltaTime;
+            if (readyToShoot)
+            {
+                Charge += chargePerSecond * Time.deltaTime;
+            }
         }
         else if (Input.GetButtonUp("Fire1"))
         {
-            if (Time.time >= lastLaunchTime + launchCooldownDuration)
+            if (readyToShoot && Time.time >= lastLaunchTime + launchCooldownDuration)
             {
                 launchCoconut(ChargePercent);
             }
             Charge = 0;
+            readyToShoot = true;
         }
         if (charge >= maxCharge)
         {
@@ -84,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void launchCoconut(float speedPercent)
     {
+        readyToShoot = false;
         Vector2 dir = launchPoint.up;// Camera.main.ScreenToWorldPoint(Input.mousePosition) - pivotPoint.position;
         float speed = (launchSpeed - minLaunchSpeed) * speedPercent + minLaunchSpeed;
         GameObject coconut = Instantiate(coconutPrefab);
