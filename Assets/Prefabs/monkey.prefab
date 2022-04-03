@@ -200,4 +200,5 @@ MonoBehaviour:
   maxMoveVotesDown: 5
   maxMoveVotesSideways: 8
   surpriseForce: 5
+  branchRangeRequirement: 0.2
   graspPoint: {fileID: 9099817254441172557}
