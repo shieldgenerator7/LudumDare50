@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 3;
     public float maxCharge = 100;
     public float chargePerSecond = 20;
+    public float launchCooldownDuration = 0.5f;
     public float minLaunchSpeed = 5;
     public float launchSpeed = 15;
 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public Transform pivotPoint;
 
     private float charge = 0;
+    private float lastLaunchTime = 0;
 
     private Rigidbody2D rb2d;
 
@@ -43,7 +45,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetButtonUp("Fire1"))
         {
-            launchCoconut(charge / maxCharge);
+            if (Time.time >= lastLaunchTime + launchCooldownDuration)
+            {
+                launchCoconut(charge / maxCharge);
+            }
             charge = 0;
         }
         if (charge >= maxCharge)
@@ -61,5 +66,6 @@ public class PlayerController : MonoBehaviour
         coconut.transform.position = launchPoint.position;
         Rigidbody2D rb2d = coconut.GetComponent<Rigidbody2D>();
         rb2d.velocity = dir.normalized * speed;
+        lastLaunchTime = Time.time;
     }
 }

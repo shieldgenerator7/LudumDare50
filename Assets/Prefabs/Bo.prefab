@@ -351,6 +351,7 @@ MonoBehaviour:
   moveSpeed: 3
   maxCharge: 100
   chargePerSecond: 50
+  launchCooldownDuration: 0.3
   minLaunchSpeed: 2
   launchSpeed: 15
   coconutPrefab: {fileID: 1005757980314189460, guid: 7cb0d1d938d448f49a7160ff608c61ad, type: 3}
