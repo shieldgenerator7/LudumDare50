@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MonkeyController : MonoBehaviour
@@ -19,5 +20,14 @@ public class MonkeyController : MonoBehaviour
     void Update()
     {
         rb2d.velocity = moveDir * moveSpeed;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerProjectile"))
+        {
+            Destroy(this);
+            GetComponents<Collider2D>().ToList().ForEach(coll => coll.isTrigger = true);
+        }
     }
 }
