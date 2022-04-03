@@ -24,7 +24,7 @@ public class MonkeyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("PlayerProjectile"))
+        if (collision.gameObject.GetComponent<CoconutController>())
         {
             Destroy(this);
             GetComponents<Collider2D>().ToList().ForEach(coll => coll.isTrigger = true);

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1540591471302445921}
   - component: {fileID: 238646191371217188}
   - component: {fileID: 5255211934550419606}
+  - component: {fileID: 8093277926558215873}
   m_Layer: 0
   m_Name: coconut
-  m_TagString: PlayerProjectile
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,3 +124,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.238
+--- !u!114 &8093277926558215873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005757980314189460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b93440ce0c5ef9478cbfd10caa3721b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
