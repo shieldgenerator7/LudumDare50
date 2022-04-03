@@ -196,3 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  moveVotesUp: 10
+  maxMoveVotesDown: 5
+  maxMoveVotesSideways: 8
+  surpriseForce: 5

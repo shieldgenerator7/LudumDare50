@@ -9,6 +9,8 @@ public class MonkeyController : MonoBehaviour
     public int moveVotesUp = 10;
     public int maxMoveVotesDown = 5;
     public int maxMoveVotesSideways = 8;
+    [Tooltip("When the monkey falls off, how high into the air he jumps first")]
+    public float surpriseForce = 10;
 
     private Vector2 moveDir = Vector2.up;
     private List<Vector2> movePossibilities;
@@ -63,6 +65,7 @@ public class MonkeyController : MonoBehaviour
 
     private void FallOff()
     {
+        rb2d.velocity = Vector2.up * surpriseForce;
         rb2d.gravityScale = 1;
         Destroy(this);
         GetComponents<Collider2D>().ToList().ForEach(coll => coll.isTrigger = true);
