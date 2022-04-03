@@ -301,6 +301,7 @@ MonoBehaviour:
   coconutPrefab: {fileID: 1005757980314189460, guid: 7cb0d1d938d448f49a7160ff608c61ad, type: 3}
   launchPoint: {fileID: 3981718652925597309}
   pivotPoint: {fileID: 8883831430912976933}
+  launchControlOption: 0
 --- !u!114 &2289018905284482375
 MonoBehaviour:
   m_ObjectHideFlags: 0

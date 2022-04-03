@@ -18,6 +18,14 @@ public class PlayerController : MonoBehaviour
     public Transform launchPoint;
     public Transform pivotPoint;
 
+    [Header("Accessibility Options")]
+    public LaunchControlOption launchControlOption;
+    public enum LaunchControlOption
+    {
+        HOLD,
+        TAP,
+    }
+
     private float charge = 0;
     public float Charge
     {
@@ -64,6 +72,26 @@ public class PlayerController : MonoBehaviour
         Vector2 dir = mousePos - (Vector2)pivotPoint.position;
         pivotPoint.up = dir;
         //Weapon charging
+        switch (launchControlOption)
+        {
+            case LaunchControlOption.HOLD:
+                checkHoldButton();
+                break;
+            case LaunchControlOption.TAP:
+                checkTapButton();
+                break;
+            default:
+                throw new System.NotImplementedException($"Unknown option: {launchControlOption}");
+        }
+        if (charge >= maxCharge)
+        {
+            launchCoconut(1);
+            Charge = 0;
+        }
+    }
+
+    private void checkHoldButton()
+    {
         if (Input.GetButton("Fire1"))
         {
             if (readyToShoot)
@@ -80,10 +108,27 @@ public class PlayerController : MonoBehaviour
             Charge = 0;
             readyToShoot = true;
         }
-        if (charge >= maxCharge)
+    }
+    private void checkTapButton()
+    {
+        if (Input.GetButtonDown("Fire1"))
         {
-            launchCoconut(1);
-            Charge = 0;
+            if (charge == 0)
+            {
+                Charge = 0.01f;
+            }
+            else
+            {
+                if (Time.time >= lastLaunchTime + launchCooldownDuration)
+                {
+                    launchCoconut(ChargePercent);
+                    Charge = 0;
+                }
+            }
+        }
+        if (charge > 0)
+        {
+            Charge += chargePerSecond * Time.deltaTime;
         }
     }
 
