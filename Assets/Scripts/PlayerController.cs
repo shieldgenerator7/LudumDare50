@@ -46,6 +46,11 @@ public class PlayerController : MonoBehaviour
             launchCoconut(charge / maxCharge);
             charge = 0;
         }
+        if (charge >= maxCharge)
+        {
+            launchCoconut(1);
+            charge = 0;
+        }
     }
 
     private void launchCoconut(float speedPercent)
