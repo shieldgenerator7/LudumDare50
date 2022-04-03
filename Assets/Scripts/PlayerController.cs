@@ -72,5 +72,8 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D rb2d = coconut.GetComponent<Rigidbody2D>();
         rb2d.velocity = dir.normalized * speed;
         lastLaunchTime = Time.time;
+        onCoconutLaunched?.Invoke(coconut.GetComponent<CoconutController>());
     }
+    public delegate void OnCoconutLaunched(CoconutController coconut);
+    public event OnCoconutLaunched onCoconutLaunched;
 }

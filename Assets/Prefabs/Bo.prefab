@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 3710759403872448764}
   - component: {fileID: 7137880658778154093}
   - component: {fileID: 4541477431276586173}
+  - component: {fileID: 2289018905284482375}
   m_Layer: 3
   m_Name: Bo
   m_TagString: Untagged
@@ -357,3 +358,17 @@ MonoBehaviour:
   coconutPrefab: {fileID: 1005757980314189460, guid: 7cb0d1d938d448f49a7160ff608c61ad, type: 3}
   launchPoint: {fileID: 3981718652925597309}
   pivotPoint: {fileID: 2079227026}
+--- !u!114 &2289018905284482375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6540565847152667836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfb047b5cecad2429f854849bdf02e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitCountDisplayPrefab: {fileID: 4674834105151056007, guid: c1568cb73acca52418b5a510a97c28c1, type: 3}
+  playerController: {fileID: 4541477431276586173}
