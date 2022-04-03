@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 7137880658778154093}
   - component: {fileID: 4541477431276586173}
   - component: {fileID: 2289018905284482375}
+  - component: {fileID: 5134881163477902356}
   m_Layer: 3
   m_Name: Bo
   m_TagString: Untagged
@@ -371,4 +372,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitCountDisplayPrefab: {fileID: 4674834105151056007, guid: c1568cb73acca52418b5a510a97c28c1, type: 3}
+  playerController: {fileID: 4541477431276586173}
+--- !u!114 &5134881163477902356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6540565847152667836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b510b80e4c7f3844958039372e8fd81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShakeEffectIntensity: 5
+  maxLaunchKnockBack: 1000
   playerController: {fileID: 4541477431276586173}

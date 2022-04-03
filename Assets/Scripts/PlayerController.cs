@@ -19,7 +19,22 @@ public class PlayerController : MonoBehaviour
     public Transform pivotPoint;
 
     private float charge = 0;
+    public float Charge
+    {
+        get => charge;
+        set
+        {
+            charge = value;
+            onChargeChanged?.Invoke(charge);
+        }
+    }
+    public delegate void OnChargeChanged(float charge);
+    public event OnChargeChanged onChargeChanged;
+
+    public float ChargePercent => charge / maxCharge;
+
     private float lastLaunchTime = 0;
+    private float prevHorizontal = 0;
 
     private Rigidbody2D rb2d;
 
@@ -50,20 +65,20 @@ public class PlayerController : MonoBehaviour
         //Weapon charging
         if (Input.GetButton("Fire1"))
         {
-            charge += chargePerSecond * Time.deltaTime;
+            Charge += chargePerSecond * Time.deltaTime;
         }
         else if (Input.GetButtonUp("Fire1"))
         {
             if (Time.time >= lastLaunchTime + launchCooldownDuration)
             {
-                launchCoconut(charge / maxCharge);
+                launchCoconut(ChargePercent);
             }
-            charge = 0;
+            Charge = 0;
         }
         if (charge >= maxCharge)
         {
             launchCoconut(1);
-            charge = 0;
+            Charge = 0;
         }
     }
 
