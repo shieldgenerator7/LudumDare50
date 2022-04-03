@@ -35,8 +35,13 @@ public class PlayerController : MonoBehaviour
         //Movement
         float horizontal = Input.GetAxisRaw("Horizontal");
         rb2d.velocity = new Vector2(horizontal * moveSpeed, rb2d.velocity.y);
+        //Flip body
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(transform.position.x - mousePos.x);
+        transform.localScale = scale;
         //Aim weapon
-        Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - pivotPoint.position;
+        Vector2 dir = mousePos - (Vector2)pivotPoint.position;
         pivotPoint.up = dir;
         //Weapon charging
         if (Input.GetButton("Fire1"))
