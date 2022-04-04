@@ -10,19 +10,18 @@ public class DisplayUpdater : MonoBehaviour
     public TMP_Text lblScoreCount;
 
     public ScoreManager scoreManager;
-    public List<BananaPile> bananaPiles;
+    public BananaManager bananaManager;
 
     // Start is called before the first frame update
     void Start()
     {
         scoreManager.onScoreChanged += updateScoreCount;
-        bananaPiles.ForEach(pile => pile.onBananaChanged += updateBananaCount);
+        bananaManager.onBananaTotalChanged += updateBananaCount;
     }
 
     void updateBananaCount(int bananas)
     {
-        int sum = bananaPiles.Sum(pile => pile.BananaCount);
-        lblBananaCount.text = "" + sum;
+        lblBananaCount.text = "" + bananas;
     }
     void updateScoreCount(int score)
     {
