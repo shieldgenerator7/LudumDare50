@@ -371,6 +371,7 @@ MonoBehaviour:
   showYPos: -3
   hideYPos: -6
   moveSpeed: 20
+  hideFollowers: []
 --- !u!114 &3736861321928206867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,6 +499,7 @@ MonoBehaviour:
   showYPos: -3
   hideYPos: -6
   moveSpeed: 20
+  hideFollowers: []
 --- !u!114 &4662406333168694898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +747,7 @@ MonoBehaviour:
   showYPos: -3
   hideYPos: -6
   moveSpeed: 20
+  hideFollowers: []
 --- !u!114 &3827889591207029562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,6 +994,11 @@ MonoBehaviour:
   showYPos: -3
   hideYPos: -6
   moveSpeed: 20
+  hideFollowers:
+  - {fileID: 6426629403655561620}
+  - {fileID: 4311550435756920922}
+  - {fileID: 6426629404985947387}
+  - {fileID: 6426629404017991423}
 --- !u!114 &7729987230575672551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,6 +1017,7 @@ MonoBehaviour:
   - {fileID: 4311550435756920922}
   - {fileID: 6426629404985947387}
   - {fileID: 6426629404017991423}
+  buttonMover: {fileID: 0}
 --- !u!4 &6294909093845688051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2634795239377815897, guid: 21636b3863f95794e9ecf82fde8f90ae, type: 3}

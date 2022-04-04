@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public MenuBar mainMenu;
     public MonkeySpawner monkeySpawner;
     public MenuBar endGameMenu;
+    public Projector introCutScene;
+    public Projector endCutScene;
 
     public ScoreManager scoreManager;
     public BananaManager bananaManager;
@@ -15,10 +17,23 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        showMainMenu();
+        playIntroCutScene();
 
         scoreManager.ScoringAllowed = false;
         bananaManager.onBananaTotalChanged += bananaCountChanged;
+
+        introCutScene.slideShow.onSlideSlowFinished += introCutSceneFinished;
+        endCutScene.slideShow.onSlideSlowFinished += endCutSceneFinished;
+    }
+
+    public void playIntroCutScene()
+    {
+        mainMenu.toggleShow(false);
+        monkeySpawner.enabled = false;
+        endGameMenu.toggleShow(false);
+
+        introCutScene.toggleShow(true);
+        endCutScene.toggleShow(false);
     }
 
     public void showMainMenu()
@@ -30,6 +45,9 @@ public class GameManager : MonoBehaviour
         endGameMenu.toggleShow(false);
 
         scoreManager.ScoringAllowed = false;
+
+        introCutScene.toggleShow(false);
+        endCutScene.toggleShow(false);
     }
 
     public void startGame()
@@ -41,6 +59,9 @@ public class GameManager : MonoBehaviour
         scoreManager.ScoringAllowed = true;
         scoreManager.ResetScore();
         bananaManager.resetBananas();
+
+        introCutScene.toggleShow(false);
+        endCutScene.toggleShow(false);
     }
 
     public void endGame()
@@ -48,12 +69,34 @@ public class GameManager : MonoBehaviour
         monkeySpawner.enabled = false;
         FindObjectsOfType<MonkeyController>().ToList()
             .ForEach(monkey => monkey.enabled = false);
-        endGameMenu.toggleShow(true);
+        endGameMenu.toggleShow(false);
 
         scoreManager.ScoringAllowed = false;
         //Destroy coconuts
         FindObjectsOfType<CoconutController>().ToList()
             .ForEach(coconut => coconut.GetComponent<Collider2D>().isTrigger = true);
+
+        introCutScene.toggleShow(false);
+        endCutScene.toggleShow(true);
+    }
+
+    public void showEndGameMenu()
+    {
+        mainMenu.toggleShow(false);
+        monkeySpawner.enabled = false;
+        endGameMenu.toggleShow(true);
+
+        introCutScene.toggleShow(false);
+        endCutScene.toggleShow(false);
+    }
+
+    private void introCutSceneFinished()
+    {
+        showMainMenu();
+    }
+    private void endCutSceneFinished()
+    {
+        showEndGameMenu();
     }
 
     private void bananaCountChanged(int bananas)

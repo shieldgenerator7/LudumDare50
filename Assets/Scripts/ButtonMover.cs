@@ -12,13 +12,15 @@ public class ButtonMover : MonoBehaviour
     private float targetY = 0;
     private bool moveActive = false;
 
+    public List<ButtonMover> hideFollowers;
+
     private Rigidbody2D rb2d;
     // Start is called before the first frame update
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        shown = false;
-        updateShowState();
+        //shown = false;
+        //updateShowState();
     }
 
     public void toggleShow()
@@ -30,6 +32,10 @@ public class ButtonMover : MonoBehaviour
     {
         shown = show;
         updateShowState();
+        if (!show)
+        {
+            hideFollowers.ForEach(mvr => mvr.toggleShow(show));
+        }
     }
 
     private void updateShowState()
