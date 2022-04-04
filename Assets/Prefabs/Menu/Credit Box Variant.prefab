@@ -549,6 +549,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8552650945932715929, guid: 21636b3863f95794e9ecf82fde8f90ae, type: 3}
   m_PrefabInstance: {fileID: 1742943847370033495}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3090409786877503145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7962698982844264142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e86c3ba3933ff24a8077a3a1a127299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showYPos: -1.5
+  hideYPos: -6
+  moveSpeed: 20
 --- !u!114 &4840822802630821634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,5 +577,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coconutLaunchForce: 15
-  showYPos: 2
-  moveSpeed: 20

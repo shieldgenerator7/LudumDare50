@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject mainMenu;
+    public MenuBar mainMenu;
     public MonkeySpawner monkeySpawner;
-    public GameObject endGameMenu;
+    public MenuBar endGameMenu;
 
     public ScoreManager scoreManager;
     public BananaManager bananaManager;
@@ -23,20 +23,20 @@ public class GameManager : MonoBehaviour
 
     public void showMainMenu()
     {
-        mainMenu.SetActive(true);
+        mainMenu.toggleShow(true);
         monkeySpawner.enabled = false;
         FindObjectsOfType<MonkeyController>().ToList()
             .ForEach(monkey => Destroy(monkey.gameObject));
-        endGameMenu.SetActive(false);
+        endGameMenu.toggleShow(false);
 
         scoreManager.ScoringAllowed = false;
     }
 
     public void startGame()
     {
-        mainMenu.SetActive(false);
+        mainMenu.toggleShow(false);
         monkeySpawner.enabled = true;
-        endGameMenu.SetActive(false);
+        endGameMenu.toggleShow(false);
 
         scoreManager.ScoringAllowed = true;
         scoreManager.ResetScore();
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         monkeySpawner.enabled = false;
         FindObjectsOfType<MonkeyController>().ToList()
             .ForEach(monkey => monkey.enabled = false);
-        endGameMenu.SetActive(true);
+        endGameMenu.toggleShow(true);
 
         scoreManager.ScoringAllowed = false;
         //Destroy coconuts
