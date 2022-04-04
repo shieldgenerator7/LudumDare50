@@ -30,10 +30,13 @@ public class GridAI : MonoBehaviour
 	
 	//find distance starts the process of moving
     public bool findDistance = true;
+	
+	//entrance/ exit ground left				10, 0
+	//entrance/ exit ground right 				0, 0 
+	//banana hoard 								5, 5
+	//sneaky entrance left						0, 4
+	//sneaky entrance right						10, 4			
 
-	//exit right 	0, 0 
-	//banan hoard 	5, 5
-	// exit left	10, 0
 	
     public Transform objectToMove;
     public float speed = 3;
@@ -50,29 +53,26 @@ public class GridAI : MonoBehaviour
 				"grid01",
 				"grid02",
 				"grid03",
-				"grid04",
 				"grid05",
 				"grid11",
 				"grid12",
 				"grid13",
-				"grid14",
 				"grid15",
 				"grid25",
 				"grid35",
 				"grid45",
+				"grid55",
 				"grid65",
 				"grid75",
 				"grid85",
 				"grid91",
 				"grid92",
 				"grid93",
-				"grid94",
 				"grid95",
 				"grid101",
 				"grid102",
 				"grid103",
-				"grid104",
-				"grid105"
+				"grid105",
 			});
 		}
         else
