@@ -33,7 +33,7 @@ public class SlideShow : MonoBehaviour
 
     private SpriteRenderer sr;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
     }
