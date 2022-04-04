@@ -330,6 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2634795239377815897}
   - component: {fileID: 1798538051517453357}
+  - component: {fileID: 2842700390680627553}
   m_Layer: 0
   m_Name: MenuButton
   m_TagString: Untagged
@@ -380,3 +381,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.378457, y: 1.2866098}
   m_EdgeRadius: 0
+--- !u!50 &2842700390680627553
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8552650945932715929}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 5
+  m_LinearDrag: 100
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

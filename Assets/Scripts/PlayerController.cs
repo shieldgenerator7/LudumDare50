@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour
     }
     private void checkTapButton()
     {
+        readyToShoot = true;
         if (Input.GetButtonDown("Fire1"))
         {
             if (charge == 0)

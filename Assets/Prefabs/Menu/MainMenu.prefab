@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4cd9285b05af1045bccf98f78d8b058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coconutLaunchForce: 15
 --- !u!1001 &8344235761540171637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -359,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14db5a53c7a63c6419169f7f4f6a183b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coconutLaunchForce: 15
   txtOptionValue: {fileID: 8344235762288751294}
   playerController: {fileID: 0}
 --- !u!224 &3960749252480410515 stripped
@@ -449,6 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c44db63f06e9140ae4b86af26952df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coconutLaunchForce: 15
 --- !u!4 &6294909094728156986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2634795239377815897, guid: 21636b3863f95794e9ecf82fde8f90ae, type: 3}
@@ -540,6 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65f2c0c258da754b90530e928ec3fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coconutLaunchForce: 15
 --- !u!4 &6294909093845688051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2634795239377815897, guid: 21636b3863f95794e9ecf82fde8f90ae, type: 3}
