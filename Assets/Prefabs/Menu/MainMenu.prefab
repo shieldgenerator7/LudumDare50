@@ -225,6 +225,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5401194431648615318, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 65.3
+      objectReference: {fileID: 0}
     - target: {fileID: 7962698982844264142, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_Name
       value: Credit Darrius
@@ -453,18 +457,18 @@ PrefabInstance:
     - target: {fileID: 2166832705228035452, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 62fae0277988a40458b130dd595de41a, type: 3}
     - target: {fileID: 2166832705228035452, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_Color.b
-      value: 0.5208259
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2166832705228035452, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_Color.g
-      value: 0.67971313
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2166832705228035452, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_Color.r
-      value: 0.8301887
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3781185797198537232, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_text
@@ -528,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5401194431648615318, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 70.1
+      value: 74.7
       objectReference: {fileID: 0}
     - target: {fileID: 6609164617619583782, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_text
@@ -646,11 +650,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2152713331152335002, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 47.6
+      value: 47.1
       objectReference: {fileID: 0}
     - target: {fileID: 2152713331152335002, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000011921
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2166832705228035452, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_Sprite
@@ -920,7 +924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5401194431648615318, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 97.1
+      value: 104.8
       objectReference: {fileID: 0}
     - target: {fileID: 6358375632304051854, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_Sprite
