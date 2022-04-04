@@ -406,6 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coconutLaunchForce: 15
+  gameManager: {fileID: 0}
 --- !u!1001 &8344235761540171637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1023,7 +1024,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: f40a5345aaba1bd47a5e7ead797432a7, type: 3}
     - target: {fileID: 3781185797198537232, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_text
-      value: CerebralLabradude
+      value: CerebralLabradudeTTV
       objectReference: {fileID: 0}
     - target: {fileID: 3895738665551229181, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_Size.x
@@ -1095,7 +1096,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5401194431648615318, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 104.8
+      value: 119.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5401194431648615318, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 6358375632304051854, guid: c36d65ac48033e940abe56b292e47cfd, type: 3}
       propertyPath: m_Sprite
