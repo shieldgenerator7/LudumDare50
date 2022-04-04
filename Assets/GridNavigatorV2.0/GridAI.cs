@@ -27,6 +27,10 @@ public class GridAI : MonoBehaviour
     int endX = 0;
     [SerializeField]
     int endY = 0;
+	[SerializeField]
+	bool hasBanana = false;
+	[SerializeField]
+	bool exitRight = false;
 	
 	//find distance starts the process of moving
     public bool findDistance = true;
@@ -45,9 +49,11 @@ public class GridAI : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+		RandomStart();
         gridArray = new GameObject[columns, rows];
         if (gridPrefab)
 		{
+			
             GenerateGrid();
 			gameObject.DeleteChildrenWithName(new []{
 				"grid01",
@@ -79,11 +85,14 @@ public class GridAI : MonoBehaviour
 		{
             print("Missing assigned gridPrefab");
 		}
+		
     }
 
     // Update is called once per frame
     void Update()
     {
+		SetTargetPosition();
+		SetSpeed();
         if (path.Count > 0)
             findDistance = false;
         if (findDistance)
@@ -293,16 +302,43 @@ public class GridAI : MonoBehaviour
 	
 	void SetTargetPosition()
 	{
-		
-		//if unit type is basic
-			//set start at current location
-			// if hasBanana is false 
-				// x chance random target
-				//set target to banana hoard 
-			//if hasBanana true
-				//set endX and endY to exit stage left / right
-			//toggle finddistance to move
+		if (startX == 5 && startY == 4)
+		{
+			hasBanana = true; 
+			if (exitRight){
+				endX = 10;
+				endY = 0;	
+			}
+			else{
+				endX = 0;
+				endY = 0;	
+			}
+			
+			findDistance = true;
+		}
 
+		else
+		{
+			endX = 5;
+			endY = 4;	
+		}
+		
+	}
+	
+	void SetSpeed(){
+		if (hasBanana){
+			speed = 5f;
+		}
+		else
+		{
+			speed = 10f;
+		}
+		
+	}
+	
+	void RandomStart()
+	{
+		startX = Mathf.CeilToInt(Random.Range(0f,10f));
 	}
 }
 
