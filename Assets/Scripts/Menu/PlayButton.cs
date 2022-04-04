@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayButton : MenuButton
 {
-    //public GameManager gameManager;
+    public GameManager gameManager;
 
     protected override void takeAction()
     {
-        //gameManager.startGame();
+        gameManager.startGame();
     }
 }
