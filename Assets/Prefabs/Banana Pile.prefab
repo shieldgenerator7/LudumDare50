@@ -126,3 +126,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pileStartValue: 200000
   takeAmount: 40000
+  pileSprites:
+  - {fileID: 0}
+  - {fileID: 578417373, guid: c873c1ce8ba7dbf4185a2bcc0f6761e2, type: 3}
+  - {fileID: 1910229724, guid: c873c1ce8ba7dbf4185a2bcc0f6761e2, type: 3}
+  - {fileID: 905182624, guid: c873c1ce8ba7dbf4185a2bcc0f6761e2, type: 3}
+  - {fileID: -2123752967, guid: c873c1ce8ba7dbf4185a2bcc0f6761e2, type: 3}
