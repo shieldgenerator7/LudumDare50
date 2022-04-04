@@ -2961,10 +2961,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1952015195}
-    - target: {fileID: 6484174142488171108, guid: 87d02e17f469b8f44b6e8362c123641a, type: 3}
-      propertyPath: playerController
+    - target: {fileID: 4968535918028388480, guid: 87d02e17f469b8f44b6e8362c123641a, type: 3}
+      propertyPath: gameManager
       value: 
-      objectReference: {fileID: 264341045}
+      objectReference: {fileID: 1952015195}
     - target: {fileID: 7675530056974758000, guid: 87d02e17f469b8f44b6e8362c123641a, type: 3}
       propertyPath: m_Name
       value: EndGameMenu
