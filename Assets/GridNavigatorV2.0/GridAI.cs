@@ -18,32 +18,32 @@ public class GridAI : MonoBehaviour
     [SerializeField]
     Vector3 leftBottomLocation = new Vector3(0, 0, 0);
     public GameObject[,] gridArray;
-	
-	//startX and startY are my starting position
+
+    //startX and startY are my starting position
     [SerializeField]
     int startX = 0;
     [SerializeField]
     int startY = 0;
-	//endX and endY are my ending position on the grid
+    //endX and endY are my ending position on the grid
     [SerializeField]
     int endX = 0;
     [SerializeField]
     int endY = 0;
-	[SerializeField]
-	bool hasBanana = false;
-	[SerializeField]
-	bool exitRight = false;
-	
-	//find distance starts the process of moving
-    public bool findDistance = true;
-	
-	//entrance/ exit ground left				10, 0
-	//entrance/ exit ground right 				0, 0 
-	//banana hoard 								5, 5
-	//sneaky entrance left						0, 4
-	//sneaky entrance right						10, 4			
+    [SerializeField]
+    bool hasBanana = false;
+    [SerializeField]
+    bool exitRight = false;
 
-	
+    //find distance starts the process of moving
+    public bool findDistance = true;
+
+    //entrance/ exit ground left				10, 0
+    //entrance/ exit ground right 				0, 0 
+    //banana hoard 								5, 5
+    //sneaky entrance left						0, 4
+    //sneaky entrance right						10, 4			
+
+
     public Transform objectToMove;
     public float speed = 3;
     int moveStep = 0;
@@ -51,60 +51,60 @@ public class GridAI : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-		RandomStart();
+        RandomStart();
         gridArray = new GameObject[columns, rows];
         if (gridPrefab)
-		{
-			
+        {
+
             GenerateGrid();
-			gameObject.DeleteChildrenWithName(new []{
-				"grid01",
-				"grid02",
-				"grid03",
-				"grid05",
-				"grid11",
-				"grid12",
-				"grid13",
-				"grid15",
-				"grid25",
-				"grid35",
-				"grid45",
-				"grid55",
-				"grid65",
-				"grid75",
-				"grid85",
-				"grid91",
-				"grid92",
-				"grid93",
-				"grid95",
-				"grid101",
-				"grid102",
-				"grid103",
-				"grid105",
-			});
-		}
+            gameObject.DeleteChildrenWithName(new[]{
+                "grid01",
+                "grid02",
+                "grid03",
+                "grid05",
+                "grid11",
+                "grid12",
+                "grid13",
+                "grid15",
+                "grid25",
+                "grid35",
+                "grid45",
+                "grid55",
+                "grid65",
+                "grid75",
+                "grid85",
+                "grid91",
+                "grid92",
+                "grid93",
+                "grid95",
+                "grid101",
+                "grid102",
+                "grid103",
+                "grid105",
+            });
+        }
         else
-		{
+        {
             print("Missing assigned gridPrefab");
-		}
-		
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-		SetTargetPosition();
-		SetSpeed();
+        SetTargetPosition();
+        SetSpeed();
         if (path.Count > 0)
             findDistance = false;
         if (findDistance)
         {
 
-          SetDistance();
+            SetDistance();
             SetPath();
         }
 
-        if (startX==endX&&startY==endY)
+        if (startX == endX && startY == endY)
             ResetGridArrary();
         MoveIt(objectToMove);
     }
@@ -114,7 +114,7 @@ public class GridAI : MonoBehaviour
         {
             for (int j = 0; j < rows; j++)
             {
-                GameObject obj = Instantiate(gridPrefab, new Vector3(leftBottomLocation.x + scale * i, leftBottomLocation.y + scale * j, leftBottomLocation.z ), Quaternion.identity);
+                GameObject obj = Instantiate(gridPrefab, new Vector3(leftBottomLocation.x + scale * i, leftBottomLocation.y + scale * j, leftBottomLocation.z), Quaternion.identity);
                 obj.transform.SetParent(gameObject.transform);
                 obj.GetComponent<GridStats>().scale = scale;
                 obj.GetComponent<GridStats>().x = i;
@@ -173,8 +173,9 @@ public class GridAI : MonoBehaviour
             path.Add(gridArray[x, y]);
             step = gridArray[x, y].GetComponent<GridStats>().visited - 1;
         }
-        else {
-          
+        else
+        {
+
             print("Can't reach the desired location or you are currently at the position.");
             return;
         }
@@ -183,50 +184,50 @@ public class GridAI : MonoBehaviour
             if (TestDirection(x, y, step, 1))
             {
                 tempList.Add(gridArray[x, y + 1]);
-               // y = y + 1;
+                // y = y + 1;
             }
             if (TestDirection(x, y, step, 2))
             {
                 tempList.Add(gridArray[x + 1, y]);
-               // x = x + 1;
+                // x = x + 1;
             }
             if (TestDirection(x, y, step, 3))
             {
                 tempList.Add(gridArray[x, y - 1]);
-               // y = y - 1;
+                // y = y - 1;
 
             }
             if (TestDirection(x, y, step, 4))
             {
                 tempList.Add(gridArray[x - 1, y]);
-              //  x = x - 1;
+                //  x = x - 1;
             }
             GameObject tempObj = FindClosest(gridArray[endX, endY].transform, tempList);
             path.Add(tempObj);
             x = tempObj.GetComponent<GridStats>().x;
-           y = tempObj.GetComponent<GridStats>().y;
+            y = tempObj.GetComponent<GridStats>().y;
             tempList.Clear();
 
         }
     }
-    
+
     void TestFourDirections(int x, int y, int step)
-        {
+    {
         if (TestDirection(x, y, -1, 1))
-            SetVisited(x, y+1, step);
+            SetVisited(x, y + 1, step);
         if (TestDirection(x, y, -1, 2))
-            SetVisited(x+1, y, step);
+            SetVisited(x + 1, y, step);
         if (TestDirection(x, y, -1, 3))
             SetVisited(x, y - 1, step);
         if (TestDirection(x, y, -1, 4))
-            SetVisited(x-1, y, step);
-        }
+            SetVisited(x - 1, y, step);
+    }
 
-    
+
     void MoveIt(Transform obj)
     {
-        int step = path.Count-1;
-        if (step > -1 && path.Count>0&&step<path.Count)
+        int step = path.Count - 1;
+        if (step > -1 && path.Count > 0 && step < path.Count)
         {
             moveDir = (path[step].transform.position - obj.position).normalized;
             obj.position = Vector3.MoveTowards(obj.position, path[step].transform.position, speed * Time.deltaTime);
@@ -237,7 +238,7 @@ public class GridAI : MonoBehaviour
                 startY = path[step].GetComponent<GridStats>().y;
                 path.RemoveAt(step);
                 moveStep = moveStep - 1;
-               
+
             }
         }
     }
@@ -276,19 +277,19 @@ public class GridAI : MonoBehaviour
     }
     GameObject FindClosest(Transform targetLocation, List<GameObject> list)
     {
-        float currentDistance = scale*rows+scale*2*columns;
+        float currentDistance = scale * rows + scale * 2 * columns;
         int indexNumber = 0;
-      
+
         for (int i = 0; i < list.Count; i++)
         {
-            if(Vector3.Distance(targetLocation.position, list[i].transform.position) < currentDistance)
+            if (Vector3.Distance(targetLocation.position, list[i].transform.position) < currentDistance)
             {
                 currentDistance = Vector3.Distance(targetLocation.position, list[i].transform.position);
-                
+
                 indexNumber = i;
             }
         }
-            return list[indexNumber];
+        return list[indexNumber];
     }
     void ResetGridArrary()
     {
@@ -297,50 +298,54 @@ public class GridAI : MonoBehaviour
             if (obj)
             {
                 obj.GetComponent<GridStats>().visited = -1;
-                
+
             }
         }
     }
-	
-	void SetTargetPosition()
-	{
-		if (startX == 5 && startY == 4)
-		{
-			hasBanana = true; 
-			if (exitRight){
-				endX = 10;
-				endY = 0;	
-			}
-			else{
-				endX = 0;
-				endY = 0;	
-			}
-			
-			findDistance = true;
-		}
 
-		else
-		{
-			endX = 5;
-			endY = 4;	
-		}
-		
-	}
-	
-	void SetSpeed(){
-		if (hasBanana){
-			speed = Random.Range(.1f,2f);
-		}
-		else
-		{
-			speed = Random.Range(2f,4f);
-		}
-		
-	}
-	
-	void RandomStart()
-	{
-		startX = Mathf.CeilToInt(Random.Range(0f,10f));
-	}
+    void SetTargetPosition()
+    {
+        if (startX == 5 && startY == 4)
+        {
+            hasBanana = true;
+            if (exitRight)
+            {
+                endX = 10;
+                endY = 0;
+            }
+            else
+            {
+                endX = 0;
+                endY = 0;
+            }
+
+            findDistance = true;
+        }
+
+        else
+        {
+            endX = 5;
+            endY = 4;
+        }
+
+    }
+
+    void SetSpeed()
+    {
+        if (hasBanana)
+        {
+            speed = Random.Range(.1f, 2f);
+        }
+        else
+        {
+            speed = Random.Range(2f, 4f);
+        }
+
+    }
+
+    void RandomStart()
+    {
+        startX = Mathf.CeilToInt(Random.Range(0f, 10f));
+    }
 }
 
