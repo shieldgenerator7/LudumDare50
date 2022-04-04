@@ -23,9 +23,7 @@ public class GameManager : MonoBehaviour
         bananaManager.onBananaTotalChanged += bananaCountChanged;
 
         introCutScene.slideShow.onSlideSlowFinished += introCutSceneFinished;
-        introCutScene.toggleShow(false);
         endCutScene.slideShow.onSlideSlowFinished += endCutSceneFinished;
-        endCutScene.toggleShow(false);
     }
 
     public void playIntroCutScene()
@@ -34,7 +32,7 @@ public class GameManager : MonoBehaviour
         monkeySpawner.enabled = false;
         endGameMenu.toggleShow(false);
 
-        introCutScene.toggleShow(false);
+        introCutScene.toggleShow(true);
         endCutScene.toggleShow(false);
     }
 

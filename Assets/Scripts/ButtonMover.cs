@@ -17,8 +17,8 @@ public class ButtonMover : MonoBehaviour
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        shown = false;
-        updateShowState();
+        //shown = false;
+        //updateShowState();
     }
 
     public void toggleShow()
@@ -28,6 +28,7 @@ public class ButtonMover : MonoBehaviour
 
     public void toggleShow(bool show)
     {
+        Debug.Log($"Toggle show: {show}, go: {name} ");
         shown = show;
         updateShowState();
     }
@@ -42,6 +43,7 @@ public class ButtonMover : MonoBehaviour
         {
             targetY = hideYPos;
         }
+        Debug.Log($"TargetY: {targetY}, go: {name} ");
         moveActive = true;
     }
 
@@ -54,6 +56,7 @@ public class ButtonMover : MonoBehaviour
             rb2d.velocity = Vector2.up * Mathf.Sign(diff) * moveSpeed;
             if (shown && posY >= targetY || !shown && posY <= targetY)
             {
+                Debug.Log($"Stopping at pos: {posY}, go: {name} ");
                 rb2d.velocity = Vector2.zero;
                 moveActive = false;
             }
