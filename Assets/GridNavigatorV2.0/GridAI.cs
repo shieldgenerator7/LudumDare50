@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GridAI : MonoBehaviour
 {
+    public Vector2 moveDir { get; private set; }
+
     public List<GameObject> path = new List<GameObject>();
     [SerializeField]
     int rows = 10;
@@ -226,7 +228,7 @@ public class GridAI : MonoBehaviour
         int step = path.Count-1;
         if (step > -1 && path.Count>0&&step<path.Count)
         {
-
+            moveDir = (path[step].transform.position - obj.position).normalized;
             obj.position = Vector3.MoveTowards(obj.position, path[step].transform.position, speed * Time.deltaTime);
             float dist = Vector3.Distance(obj.transform.position, path[step].transform.localPosition);
             if (dist < .05f)
