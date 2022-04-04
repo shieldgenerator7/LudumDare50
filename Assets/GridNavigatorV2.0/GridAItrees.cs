@@ -31,6 +31,7 @@ public class GridAItrees : MonoBehaviour
 	bool hasBanana = false;
 	[SerializeField]
 	bool exitRight = false;
+
 	
 	//find distance starts the process of moving
     public bool findDistance = true;
@@ -327,11 +328,11 @@ public class GridAItrees : MonoBehaviour
 	
 	void SetSpeed(){
 		if (hasBanana){
-			speed = Random.Range(1.5f,4f);
+			speed = Random.Range(.1f,1.5f);
 		}
 		else
 		{
-			speed = Random.Range(2.5f,7f);
+			speed = Random.Range(1f,4f);
 		}
 		
 	}
