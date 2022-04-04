@@ -113,6 +113,8 @@ public class MonkeyController : MonoBehaviour
         rb2d.gravityScale = 1;
         Destroy(this);
         GetComponents<Collider2D>().ToList().ForEach(coll => coll.isTrigger = true);
+        moveDir = Vector2.zero;
+        updateAnimator();
     }
 
     private void changeDirection()
