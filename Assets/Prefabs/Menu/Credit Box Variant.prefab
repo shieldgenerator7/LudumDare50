@@ -493,6 +493,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 42.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2842700390680627553, guid: 21636b3863f95794e9ecf82fde8f90ae, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842700390680627553, guid: 21636b3863f95794e9ecf82fde8f90ae, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3323761652177762730, guid: 21636b3863f95794e9ecf82fde8f90ae, type: 3}
       propertyPath: m_SortingOrder
       value: -11
@@ -536,3 +544,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4988799002885203174, guid: 21636b3863f95794e9ecf82fde8f90ae, type: 3}
   m_PrefabInstance: {fileID: 1742943847370033495}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7962698982844264142 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8552650945932715929, guid: 21636b3863f95794e9ecf82fde8f90ae, type: 3}
+  m_PrefabInstance: {fileID: 1742943847370033495}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4840822802630821634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7962698982844264142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a777c97f152504595e326d61e1844b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coconutLaunchForce: 15
+  showYPos: 2
+  moveSpeed: 20

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CreditsButton : MenuButton
 {
+    public List<CreditBoxButton> creditBoxes;
+
     protected override void takeAction()
     {
-        throw new System.NotImplementedException();
+        creditBoxes.ForEach(box => box.toggleShow(true));
     }
 }

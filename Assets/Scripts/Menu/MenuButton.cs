@@ -6,6 +6,12 @@ public abstract class MenuButton : MonoBehaviour
 {
     public float coconutLaunchForce = 10;
 
+    protected Rigidbody2D rb2d;
+    protected virtual void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         CoconutController coconut = collision.gameObject.GetComponent<CoconutController>();
