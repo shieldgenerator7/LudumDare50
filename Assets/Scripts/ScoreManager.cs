@@ -45,6 +45,8 @@ public class ScoreManager : MonoBehaviour
         instance = this;
         //Delegates
         playerController.onCoconutLaunched += coconutLaunched;
+        //Initialize score
+        ResetScore();
     }
 
     void coconutLaunched(CoconutController coconut)

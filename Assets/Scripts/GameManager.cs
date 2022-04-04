@@ -38,8 +38,9 @@ public class GameManager : MonoBehaviour
         monkeySpawner.enabled = true;
         endGameMenu.SetActive(false);
 
-        scoreManager.ResetScore();
         scoreManager.ScoringAllowed = true;
+        scoreManager.ResetScore();
+        bananaManager.resetBananas();
     }
 
     public void endGame()
@@ -50,6 +51,9 @@ public class GameManager : MonoBehaviour
         endGameMenu.SetActive(true);
 
         scoreManager.ScoringAllowed = false;
+        //Destroy coconuts
+        FindObjectsOfType<CoconutController>().ToList()
+            .ForEach(coconut => coconut.GetComponent<Collider2D>().isTrigger = true);
     }
 
     private void bananaCountChanged(int bananas)
