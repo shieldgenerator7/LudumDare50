@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surpriseForce: 10
-  gridAI: {fileID: 0}
+  gridAI: {fileID: 45390159598503552}
 --- !u!95 &2418946869561092731
 Animator:
   serializedVersion: 4
