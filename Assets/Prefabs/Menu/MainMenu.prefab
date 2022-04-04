@@ -749,6 +749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coconutLaunchForce: 15
+  minYPos: -10
 --- !u!4 &6294909094728156986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2634795239377815897, guid: 21636b3863f95794e9ecf82fde8f90ae, type: 3}
