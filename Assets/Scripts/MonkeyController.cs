@@ -20,10 +20,14 @@ public class MonkeyController : MonoBehaviour
 
     private Branch currentBranch;
 
+    private Animator animator;
     private Rigidbody2D rb2d;
     // Start is called before the first frame update
     void Start()
     {
+        //Animator
+        animator = GetComponent<Animator>();
+        updateAnimator();
         //RB2D
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.gravityScale = 0;
@@ -92,6 +96,17 @@ public class MonkeyController : MonoBehaviour
         }
     }
 
+    private void updateAnimator()
+    {
+        //Animator
+        animator.SetBool("climbVert", moveDir.x == 0 && moveDir.y != 0);
+        animator.SetBool("climbHoriz", moveDir.x != 0 && moveDir.y == 0);
+        //Transform
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(moveDir.x);
+        transform.localScale = scale;
+    }
+
     private void FallOff()
     {
         rb2d.velocity = Vector2.up * surpriseForce;
@@ -104,6 +119,7 @@ public class MonkeyController : MonoBehaviour
     {
         int rand = Random.Range(0, movePossibilities.Count);
         moveDir = movePossibilities[rand];
+        updateAnimator();
     }
 
     private void graspBranchIfNeeded(Branch branch)
