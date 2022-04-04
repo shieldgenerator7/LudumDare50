@@ -10,6 +10,7 @@ public class SlideShow : MonoBehaviour
     [Header("Components")]
     public List<Sprite> slides;
 
+    private bool playing = false;
     private int currentSlide = 0;
     public int SlideIndex
     {
@@ -20,6 +21,7 @@ public class SlideShow : MonoBehaviour
             sr.sprite = slides[currentSlide];
             if (value >= slides.Count)
             {
+                playing = false;
                 onSlideSlowFinished?.Invoke();
             }
         }
@@ -39,25 +41,32 @@ public class SlideShow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= lastSlideStartTime + maxSlideDuration)
+        if (playing)
         {
-            nextSlide();
-        }
-        if (Input.GetButtonDown("Fire1"))
-        {
-            nextSlide();
+            if (Time.time >= lastSlideStartTime + maxSlideDuration)
+            {
+                nextSlide();
+            }
+            if (Input.GetButtonDown("Fire1"))
+            {
+                nextSlide();
+            }
         }
     }
 
     public void startSlideShow()
     {
+        playing = true;
         lastSlideStartTime = Time.time;
         SlideIndex = 0;
     }
 
     public void nextSlide()
     {
-        lastSlideStartTime = Time.time;
-        SlideIndex++;
+        if (playing)
+        {
+            lastSlideStartTime = Time.time;
+            SlideIndex++;
+        }
     }
 }
