@@ -46,11 +46,13 @@ public class PlayerController : MonoBehaviour
     private float prevHorizontal = 0;
 
     private Rigidbody2D rb2d;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -88,6 +90,8 @@ public class PlayerController : MonoBehaviour
             launchCoconut(1);
             Charge = 0;
         }
+        //Animator
+        animator.SetFloat("moveSpeed", Mathf.Abs(horizontal));
     }
 
     private void checkHoldButton()
