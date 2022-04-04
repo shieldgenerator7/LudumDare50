@@ -47,10 +47,10 @@ public class SlideShow : MonoBehaviour
             {
                 nextSlide();
             }
-            if (Input.GetButtonDown("Fire1"))
-            {
-                nextSlide();
-            }
+            //if (Input.GetButtonDown("Fire1"))
+            //{
+            //    nextSlide();
+            //}
         }
     }
 
