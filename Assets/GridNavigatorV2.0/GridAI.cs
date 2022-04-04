@@ -16,16 +16,25 @@ public class GridAI : MonoBehaviour
     [SerializeField]
     Vector3 leftBottomLocation = new Vector3(0, 0, 0);
     public GameObject[,] gridArray;
+	
+	//startX and startY are my starting position
     [SerializeField]
     int startX = 0;
     [SerializeField]
     int startY = 0;
+	//endX and endY are my ending position on the grid
     [SerializeField]
     int endX = 0;
     [SerializeField]
     int endY = 0;
+	
+	//find distance starts the process of moving
     public bool findDistance = true;
 
+	//exit right 	0, 0 
+	//banan hoard 	5, 5
+	// exit left	10, 0
+	
     public Transform objectToMove;
     public float speed = 3;
     int moveStep = 0;
@@ -249,5 +258,19 @@ public class GridAI : MonoBehaviour
             }
         }
     }
+	
+	void SetTargetPosition()
+	{
+		
+		//if unit type is basic
+			//set start at current location
+			// if hasBanana is false 
+				// x chance random target
+				//set target to banana hoard 
+			//if hasBanana true
+				//set endX and endY to exit stage left / right
+			//toggle finddistance to move
+
+	}
 }
 
