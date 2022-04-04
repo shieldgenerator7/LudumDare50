@@ -21,12 +21,17 @@ public class ScoreManager : MonoBehaviour
         get => score;
         private set
         {
-            score = Mathf.Max(0, value);
-            onScoreChanged?.Invoke(score);
+            if (ScoringAllowed)
+            {
+                score = Mathf.Max(0, value);
+                onScoreChanged?.Invoke(score);
+            }
         }
     }
     public delegate void OnScoreChanged(int score);
     public event OnScoreChanged onScoreChanged;
+
+    public bool ScoringAllowed { get; set; } = true;
 
     public static ScoreManager instance;
     // Start is called before the first frame update
@@ -51,5 +56,10 @@ public class ScoreManager : MonoBehaviour
     void coconutHit(int hitCount)
     {
         Score += scoreOnHit + (int)((hitCount - 1) * scoreOnHitExtra);
+    }
+
+    public void ResetScore()
+    {
+        Score = 0;
     }
 }
