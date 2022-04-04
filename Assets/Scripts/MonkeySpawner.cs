@@ -31,7 +31,8 @@ public class MonkeySpawner : MonoBehaviour
 
     private void spawnMonkey(Vector2 pos)
     {
-        GameObject monkey = Instantiate(monkeyPrefab);
+        GameObject monkey = Instantiate(monkeyPrefab)
+            .GetComponent<GridAI>().objectToMove.gameObject;
         monkey.transform.position = pos;
         lastMonkeySpawnTime = Time.time;
     }
