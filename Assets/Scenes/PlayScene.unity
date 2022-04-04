@@ -3323,21 +3323,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4662406333168694898, guid: 3d8e04d3320f7cb4ba613b27843639e9, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 264341045}
     - target: {fileID: 8344235761446065253, guid: 3d8e04d3320f7cb4ba613b27843639e9, type: 3}
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8344235761446065253, guid: 3d8e04d3320f7cb4ba613b27843639e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.806695
+      value: -0.11
       objectReference: {fileID: 0}
     - target: {fileID: 8344235761446065253, guid: 3d8e04d3320f7cb4ba613b27843639e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5973891
+      value: -2.61
       objectReference: {fileID: 0}
     - target: {fileID: 8344235761446065253, guid: 3d8e04d3320f7cb4ba613b27843639e9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.036467567
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8344235761446065253, guid: 3d8e04d3320f7cb4ba613b27843639e9, type: 3}
       propertyPath: m_LocalRotation.w
