@@ -46,6 +46,11 @@ public class Fader : MonoBehaviour
             c = txt.color;
             c.a = alpha;
             txt.color = c;
+            //Destroy
+            if (alpha <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
