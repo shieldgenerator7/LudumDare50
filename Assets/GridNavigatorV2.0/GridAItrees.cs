@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridAI : MonoBehaviour
+public class GridAItrees : MonoBehaviour
 {
     public List<GameObject> path = new List<GameObject>();
     [SerializeField]
@@ -49,7 +49,7 @@ public class GridAI : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-		RandomStart();
+		StartTop();
         gridArray = new GameObject[columns, rows];
         if (gridPrefab)
 		{
@@ -307,11 +307,11 @@ public class GridAI : MonoBehaviour
 			hasBanana = true; 
 			if (exitRight){
 				endX = 10;
-				endY = 0;	
+				endY = 4;	
 			}
 			else{
 				endX = 0;
-				endY = 0;	
+				endY = 4;	
 			}
 			
 			findDistance = true;
@@ -327,18 +327,23 @@ public class GridAI : MonoBehaviour
 	
 	void SetSpeed(){
 		if (hasBanana){
-			speed = (Random.Range(1.5f,4f));
+			speed = Random.Range(1.5f,4f);
 		}
 		else
 		{
-			speed = (Random.Range(3f,7f));
+			speed = Random.Range(2.5f,7f);
 		}
 		
 	}
 	
 	void RandomStart()
 	{
-		startX = Mathf.CeilToInt(Random.Range(0f,10f));
+		//startX = Mathf.CeilToInt(Random.Range(0f,10f));
+	}
+	
+	void StartTop(){
+		startY = 4;
+		
 	}
 }
 
