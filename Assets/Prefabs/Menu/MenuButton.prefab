@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 359801963245974725}
   - component: {fileID: 3157442566526734401}
   - component: {fileID: 7359258093809148835}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 924244239295031407}
   - component: {fileID: 3323761652177762730}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Board
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7452652899898547973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0026, y: 0.0134, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -178,8 +178,8 @@ SpriteRenderer:
   m_Color: {r: 0.5377358, g: 0.36711892, b: 0.22574759, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 39.20457, y: 22.78}
+  m_DrawMode: 1
+  m_Size: {x: 2.6816194, y: 1.6032474}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 2822237884232810906}
   - component: {fileID: 6877338266139744833}
   - component: {fileID: 5944616999245896302}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: txtText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 2634795239377815897}
   - component: {fileID: 1798538051517453357}
   - component: {fileID: 2842700390680627553}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
