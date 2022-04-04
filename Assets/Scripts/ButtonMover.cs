@@ -12,6 +12,8 @@ public class ButtonMover : MonoBehaviour
     private float targetY = 0;
     private bool moveActive = false;
 
+    public List<ButtonMover> hideFollowers;
+
     private Rigidbody2D rb2d;
     // Start is called before the first frame update
     private void Start()
@@ -28,9 +30,12 @@ public class ButtonMover : MonoBehaviour
 
     public void toggleShow(bool show)
     {
-        Debug.Log($"Toggle show: {show}, go: {name} ");
         shown = show;
         updateShowState();
+        if (!show)
+        {
+            hideFollowers.ForEach(mvr => mvr.toggleShow(show));
+        }
     }
 
     private void updateShowState()
@@ -43,7 +48,6 @@ public class ButtonMover : MonoBehaviour
         {
             targetY = hideYPos;
         }
-        Debug.Log($"TargetY: {targetY}, go: {name} ");
         moveActive = true;
     }
 
@@ -56,7 +60,6 @@ public class ButtonMover : MonoBehaviour
             rb2d.velocity = Vector2.up * Mathf.Sign(diff) * moveSpeed;
             if (shown && posY >= targetY || !shown && posY <= targetY)
             {
-                Debug.Log($"Stopping at pos: {posY}, go: {name} ");
                 rb2d.velocity = Vector2.zero;
                 moveActive = false;
             }
