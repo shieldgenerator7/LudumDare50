@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 45390159598503553}
   - component: {fileID: 45390159598503552}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GridAI_botL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,10 @@ GameObject:
   m_Component:
   - component: {fileID: 45390160135253445}
   - component: {fileID: 45390160135253442}
-  m_Layer: 0
+  - component: {fileID: 3185023018343226058}
+  - component: {fileID: 2418946869561092731}
+  - component: {fileID: 5578131307011360959}
+  m_Layer: 7
   m_Name: enemyShaman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,14 +136,74 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -275270475, guid: 935325164d52bb646b2fca2789cc5452, type: 3}
+  m_Sprite: {fileID: 1591025674, guid: 4ca4ebb5b8f96c44a8d34e500d02bfc3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.66, y: 0.97333336}
+  m_Size: {x: 1.88, y: 2.29}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3185023018343226058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45390160135253444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4faeae6231a697c42932c025ad47fdfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surpriseForce: 10
+  gridAI: {fileID: 0}
+--- !u!95 &2418946869561092731
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45390160135253444}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 16b10869a4502344db211d742500a849, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &5578131307011360959
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45390160135253444}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.87333333, y: 1.25}
+    newSize: {x: 1.88, y: 2.29}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.94, y: 1.145}
+  m_EdgeRadius: 0
