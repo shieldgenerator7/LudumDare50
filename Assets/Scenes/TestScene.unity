@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &22078895 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7992314035416203617, guid: fa816ccd315bfbf4f842b3dc8ec6733f, type: 3}
-  m_PrefabInstance: {fileID: 1008742272}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &140528718
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,11 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca6c33b81f50a4418c9f401123fcc75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 6
-  columns: 11
-  scale: 1.7
-  gridPrefab: {fileID: 22078895}
-  leftBottomLocation: {x: 0, y: 0, z: 0}
 --- !u!4 &140528720
 Transform:
   m_ObjectHideFlags: 0
@@ -2407,11 +2397,11 @@ MonoBehaviour:
   scale: 1.7
   gridPrefab: {fileID: 984992003093079696, guid: 00d3b164b1e31724392158ba8ca459b5, type: 3}
   leftBottomLocation: {x: 0, y: 0, z: 0}
-  startX: 5
-  startY: 4
-  endX: 0
-  endY: 0
-  findDistance: 0
+  startX: 0
+  startY: 0
+  endX: 5
+  endY: 5
+  findDistance: 1
   objectToMove: {fileID: 1183251824}
   speed: 10
 --- !u!4 &1029302423

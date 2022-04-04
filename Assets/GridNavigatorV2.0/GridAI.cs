@@ -44,9 +44,41 @@ public class GridAI : MonoBehaviour
     {
         gridArray = new GameObject[columns, rows];
         if (gridPrefab)
+		{
             GenerateGrid();
+			gameObject.DeleteChildrenWithName(new []{
+				"grid01",
+				"grid02",
+				"grid03",
+				"grid04",
+				"grid05",
+				"grid11",
+				"grid12",
+				"grid13",
+				"grid14",
+				"grid15",
+				"grid25",
+				"grid35",
+				"grid45",
+				"grid65",
+				"grid75",
+				"grid85",
+				"grid91",
+				"grid92",
+				"grid93",
+				"grid94",
+				"grid95",
+				"grid101",
+				"grid102",
+				"grid103",
+				"grid104",
+				"grid105"
+			});
+		}
         else
+		{
             print("Missing assigned gridPrefab");
+		}
     }
 
     // Update is called once per frame
@@ -56,7 +88,7 @@ public class GridAI : MonoBehaviour
             findDistance = false;
         if (findDistance)
         {
-          
+
           SetDistance();
             SetPath();
         }
