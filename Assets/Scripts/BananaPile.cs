@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class BananaPile : MonoBehaviour
 {
+    [Header("Settings")]
     [Tooltip("How man bananas the pile starts with")]
     public int pileStartValue = 1000000;
     [Tooltip("How many bananas a monkey takes when they raid this pile")]
     public int takeAmount = 200000;
+
+    [Header("Components")]
+    [Tooltip("First sprite is empty, Last sprite is full")]
+    public List<Sprite> pileSprites;
 
     private int bananaCount;
     public int BananaCount
@@ -22,8 +27,11 @@ public class BananaPile : MonoBehaviour
     public delegate void OnBananaCountChanged(int bananaCount);
     public event OnBananaCountChanged onBananaChanged;
 
+    private SpriteRenderer sr;
     private void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
+        onBananaChanged += updatePileSprite;
         BananaCount = pileStartValue;
     }
 
@@ -34,5 +42,12 @@ public class BananaPile : MonoBehaviour
         {
             BananaCount -= takeAmount;
         }
+    }
+
+    private void updatePileSprite(int count)
+    {
+        float percent = (float)count / (float)pileStartValue;
+        int index = Mathf.CeilToInt(percent * (pileSprites.Count - 1));
+        sr.sprite = pileSprites[index];
     }
 }
