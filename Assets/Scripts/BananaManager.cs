@@ -22,4 +22,9 @@ public class BananaManager : MonoBehaviour
     }
     public delegate void OnBananaTotalChanged(int count);
     public event OnBananaTotalChanged onBananaTotalChanged;
+
+    public void resetBananas()
+    {
+        bananaPiles.ForEach(pile => pile.resetBananas());
+    }
 }

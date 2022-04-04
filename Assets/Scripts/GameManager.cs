@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject endGameMenu;
 
     public ScoreManager scoreManager;
+    public BananaManager bananaManager;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
         showMainMenu();
 
         scoreManager.ScoringAllowed = false;
+        bananaManager.onBananaTotalChanged += bananaCountChanged;
     }
 
     public void showMainMenu()
@@ -48,5 +50,14 @@ public class GameManager : MonoBehaviour
         endGameMenu.SetActive(true);
 
         scoreManager.ScoringAllowed = false;
+    }
+
+    private void bananaCountChanged(int bananas)
+    {
+        if (bananas == 0)
+        {
+            //Game Over
+            endGame();
+        }
     }
 }

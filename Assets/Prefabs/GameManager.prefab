@@ -56,6 +56,7 @@ MonoBehaviour:
   monkeySpawner: {fileID: 0}
   endGameMenu: {fileID: 0}
   scoreManager: {fileID: 3016209720563264818}
+  bananaManager: {fileID: 6337554276312891375}
 --- !u!114 &4865024461938881427
 MonoBehaviour:
   m_ObjectHideFlags: 0

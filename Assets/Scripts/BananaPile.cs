@@ -32,7 +32,7 @@ public class BananaPile : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         onBananaChanged += updatePileSprite;
-        BananaCount = pileStartValue;
+        resetBananas();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,5 +49,10 @@ public class BananaPile : MonoBehaviour
         float percent = (float)count / (float)pileStartValue;
         int index = Mathf.CeilToInt(percent * (pileSprites.Count - 1));
         sr.sprite = pileSprites[index];
+    }
+
+    public void resetBananas()
+    {
+        BananaCount = pileStartValue;
     }
 }
