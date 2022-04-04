@@ -9,14 +9,19 @@ using UnityEditor;
 public class QuitButton : MenuButton
 {
     public float minYPos = -5;
+    public float maxWaitDuration = 5;
 
     private List<MenuButton> buttons;
     private PlayerController playerController;
     private bool quitting = false;
 
+    private float quitStartTime;
+
     protected override void takeAction()
     {
+        //Start timer
         quitting = true;
+        quitStartTime = Time.time;
         //Make all buttons fall
         buttons = FindObjectsOfType<MenuButton>().ToList();
         buttons.ForEach(btn =>
@@ -39,6 +44,10 @@ public class QuitButton : MenuButton
     {
         if (quitting)
         {
+            if (Time.time >= quitStartTime + maxWaitDuration)
+            {
+                quit();
+            }
             if (buttons.All(btn => btn.transform.position.y <= minYPos)
                 && playerController.transform.position.y <= minYPos)
             {                
