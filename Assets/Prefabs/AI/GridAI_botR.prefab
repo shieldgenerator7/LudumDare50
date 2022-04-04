@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9087128174105611367}
   - component: {fileID: 9087128174105611366}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: enemyShaman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9087128175077330529}
   - component: {fileID: 9087128175077330530}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GridAI_botR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

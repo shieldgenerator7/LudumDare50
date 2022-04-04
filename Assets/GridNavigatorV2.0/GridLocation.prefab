@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7825807090951843007}
   - component: {fileID: 1381456234942036939}
-  - component: {fileID: 8331452612145999636}
   m_Layer: 0
   m_Name: GridLocation
   m_TagString: Untagged
@@ -49,16 +48,3 @@ MonoBehaviour:
   scale: 1
   x: 0
   y: 0
---- !u!65 &8331452612145999636
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984992003093079696}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}

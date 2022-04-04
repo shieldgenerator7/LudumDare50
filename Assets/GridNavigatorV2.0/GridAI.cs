@@ -96,7 +96,9 @@ public class GridAI : MonoBehaviour
         SetTargetPosition();
         SetSpeed();
         if (path.Count > 0)
+        {
             findDistance = false;
+        }
         if (findDistance)
         {
 
@@ -105,7 +107,9 @@ public class GridAI : MonoBehaviour
         }
 
         if (startX == endX && startY == endY)
+        {
             ResetGridArrary();
+        }
         MoveIt(objectToMove);
     }
     void GenerateGrid()
