@@ -31,6 +31,9 @@ public class GridAI : MonoBehaviour
     int endY = 0;
     [SerializeField]
     bool hasBanana = false;
+	[SerializeField]
+	bool inTrees = false;
+	
     public bool HasBanana
     {
         get => hasBanana;
@@ -62,6 +65,10 @@ public class GridAI : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+		if (inTrees){
+			StartTop();
+		}
+		
         RandomStart();
         gridArray = new GameObject[columns, rows];
         if (gridPrefab)
@@ -104,24 +111,49 @@ public class GridAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetTargetPosition();
-        SetSpeed();
-        if (path.Count > 0)
-        {
-            findDistance = false;
-        }
-        if (findDistance)
-        {
+		if (inTrees)
+		{
+			SetTargetPositionTrees();
+			SetSpeedTrees();
+			if (path.Count > 0)
+			{
+				findDistance = false;
+			}
+			if (findDistance)
+			{
 
-            SetDistance();
-            SetPath();
-        }
+				SetDistance();
+				SetPath();
+			}
 
-        if (startX == endX && startY == endY)
-        {
-            ResetGridArrary();
-        }
-        MoveIt(objectToMove);
+			if (startX == endX && startY == endY)
+			{
+				ResetGridArrary();
+			}
+			MoveIt(objectToMove);
+		}
+		else
+		{
+				SetTargetPosition();
+			SetSpeed();
+			if (path.Count > 0)
+			{
+				findDistance = false;
+			}
+			if (findDistance)
+			{
+
+				SetDistance();
+				SetPath();
+			}
+
+			if (startX == endX && startY == endY)
+			{
+				ResetGridArrary();
+			}
+			MoveIt(objectToMove);
+		}
+        
     }
     void GenerateGrid()
     {
@@ -362,5 +394,46 @@ public class GridAI : MonoBehaviour
     {
         startX = Mathf.CeilToInt(Random.Range(0f, 10f));
     }
+	
+	void StartTop(){
+		startY = 4;
+		
+	}
+		
+	void SetTargetPositionTrees()
+	{
+		if (startX == 5 && startY == 4)
+		{
+			hasBanana = true; 
+			if (exitRight){
+				endX = 10;
+				endY = 4;	
+			}
+			else{
+				endX = 0;
+				endY = 4;	
+			}
+			
+			findDistance = true;
+		}
+
+		else
+		{
+			endX = 5;
+			endY = 4;	
+		}
+		
+	}
+	
+	void SetSpeedTrees(){
+		if (hasBanana){
+			speed = Random.Range(.1f,1.5f);
+		}
+		else
+		{
+			speed = Random.Range(1f,4f);
+		}
+		
+	}
 }
 
