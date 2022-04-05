@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4865024461938881427}
   - component: {fileID: 3016209720563264818}
   - component: {fileID: 6337554276312891375}
+  - component: {fileID: 355097823991714546}
   - component: {fileID: 2056030673}
   - component: {fileID: 2056030674}
   - component: {fileID: 2056030675}
@@ -59,6 +60,9 @@ MonoBehaviour:
   mainMenu: {fileID: 0}
   monkeySpawner:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   endGameMenu: {fileID: 0}
   introCutScene: {fileID: 0}
   endCutScene: {fileID: 0}
@@ -96,10 +100,6 @@ MonoBehaviour:
   scoreOnHitExtra: 100
   coconutScoreCost: 10
   playerController: {fileID: 0}
-  gunFire: {fileID: 2056030676}
-  hitGeneric: {fileID: 2056030675}
-  hitEnemy: {fileID: 2056030674}
-  bananaGet: {fileID: 2056030673}
 --- !u!114 &6337554276312891375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +114,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bananaPiles:
   - {fileID: 6220205375361622516}
+--- !u!114 &355097823991714546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5155665751606939532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7c0e016e83350c4a87bc4b47111e75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunCharge: {fileID: 2056030673}
+  gunFire: {fileID: 2056030674}
+  hitEnemy: {fileID: 2056030676}
+  hitOther: {fileID: 2056030675}
+  bananaGet: {fileID: 2056030674}
+  playerController: {fileID: 0}
+  bananaManager: {fileID: 6337554276312891375}
 --- !u!82 &2056030673
 AudioSource:
   m_ObjectHideFlags: 0
@@ -124,10 +143,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 47bfe20126d0fce46a57810cba908504, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 76db816586136f1408949baca565381f, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -221,7 +240,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5365192930c3d26459b1cb183bfe64bb, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -316,8 +335,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 60f1a6cc421a33d4883badfcc6d12872, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: bb6c0aae8a40eb14d869bde64e0191c7, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -413,7 +432,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: df5c341cea4f27544ba0d5f4e4c59105, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

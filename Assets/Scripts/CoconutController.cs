@@ -47,5 +47,11 @@ public class CoconutController : MonoBehaviour
         {
             HitCount++;
         }
+        else
+        {
+            onHitOther?.Invoke();
+        }
     }
+    public delegate void OnHitOther();
+    public event OnHitOther onHitOther;
 }

@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 14878152}
-  - component: {fileID: 14878151}
   - component: {fileID: 14878150}
   - component: {fileID: 14878149}
   - component: {fileID: 14878148}
@@ -248,18 +247,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 10}
   m_EdgeRadius: 0
---- !u!114 &14878151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14878146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3895a5123f0ad9d4ba55fb633ae52681, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &14878152
 Transform:
   m_ObjectHideFlags: 0
@@ -4242,6 +4229,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 355097823991714546, guid: 40cfe4333ef1a5841a46300e8195957e, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 195170495}
     - target: {fileID: 3016209720563264818, guid: 40cfe4333ef1a5841a46300e8195957e, type: 3}
       propertyPath: playerController
       value: 
