@@ -32,12 +32,17 @@ public class MonkeyController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        updateAnimator();
+    }
+
     private void updateAnimator()
     {
         //Animator
         Vector2 moveDir = gridAI.moveDir;
-        animator.SetBool("climbVert", moveDir.x == 0 && moveDir.y != 0);
-        animator.SetBool("climbHoriz", moveDir.x != 0 && moveDir.y == 0);
+        animator.SetBool("climbVert", !Mathf.Approximately(moveDir.y, 0));
+        animator.SetBool("climbHoriz", !Mathf.Approximately(moveDir.x, 0));
         //Transform
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * Mathf.Sign(moveDir.x);
