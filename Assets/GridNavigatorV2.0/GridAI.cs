@@ -31,6 +31,17 @@ public class GridAI : MonoBehaviour
     int endY = 0;
     [SerializeField]
     bool hasBanana = false;
+    public bool HasBanana
+    {
+        get => hasBanana;
+        set
+        {
+            hasBanana = value;
+            onHasBananaChanged?.Invoke(hasBanana);
+        }
+    }
+    public delegate void OnHasBananaChanged(bool has);
+    public event OnHasBananaChanged onHasBananaChanged;
     [SerializeField]
     bool exitRight = false;
 
@@ -311,7 +322,7 @@ public class GridAI : MonoBehaviour
     {
         if (startX == 5 && startY == 4)
         {
-            hasBanana = true;
+            HasBanana = true;
             if (exitRight)
             {
                 endX = 10;

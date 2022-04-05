@@ -8,6 +8,8 @@ public class MonkeyController : MonoBehaviour
     [Tooltip("When the monkey falls off, how high into the air he jumps first")]
     public float surpriseForce = 10;
 
+    public GameObject banana;
+
     public GridAI gridAI;
 
     private Animator animator;
@@ -17,6 +19,8 @@ public class MonkeyController : MonoBehaviour
         //Animator
         animator = GetComponent<Animator>();
         updateAnimator();
+        //GridAI
+        gridAI.onHasBananaChanged += showBanana;
     }
 
     private void OnDestroy()
@@ -30,6 +34,11 @@ public class MonkeyController : MonoBehaviour
         {
             FallOff();
         }
+    }
+
+    private void showBanana(bool show)
+    {
+        banana.SetActive(show);
     }
 
     private void Update()
@@ -51,10 +60,12 @@ public class MonkeyController : MonoBehaviour
 
     private void FallOff()
     {
-        Rigidbody2D rb2d = gameObject.AddComponent<Rigidbody2D>();
+        Rigidbody2D rb2d = gameObject.GetComponent<Rigidbody2D>();
         rb2d.velocity = Vector2.up * surpriseForce;
         rb2d.gravityScale = 1;
+        rb2d.isKinematic = false;
         this.enabled = false;
+        gridAI.enabled = false;
         GetComponents<Collider2D>().ToList().ForEach(coll => coll.isTrigger = true);
         updateAnimator();
     }
