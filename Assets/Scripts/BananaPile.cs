@@ -38,7 +38,7 @@ public class BananaPile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         MonkeyController monkey = collision.gameObject.GetComponent<MonkeyController>();
-        if (monkey)
+        if (monkey && !collision.isTrigger)
         {
             BananaCount -= takeAmount;
         }
