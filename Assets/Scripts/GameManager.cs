@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public MenuBar mainMenu;
-    public MonkeySpawner monkeySpawner;
+    public List<MonkeySpawner> monkeySpawner;
     public MenuBar endGameMenu;
     public Projector introCutScene;
     public Projector endCutScene;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public void playIntroCutScene()
     {
         mainMenu.toggleShow(false);
-        monkeySpawner.enabled = false;
+        monkeySpawner.ForEach(spn => spn.enabled = false);
         endGameMenu.toggleShow(false);
 
         introCutScene.toggleShow(true);
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public void showMainMenu()
     {
         mainMenu.toggleShow(true);
-        monkeySpawner.enabled = false;
+        monkeySpawner.ForEach(spn => spn.enabled = false);
         FindObjectsOfType<MonkeyController>().ToList()
             .ForEach(monkey => Destroy(monkey.gameObject));
         endGameMenu.toggleShow(false);
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     public void startGame()
     {
         mainMenu.toggleShow(false);
-        monkeySpawner.enabled = true;
+        monkeySpawner.ForEach(spn => spn.enabled = true);
         endGameMenu.toggleShow(false);
 
         scoreManager.ScoringAllowed = true;
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     public void endGame()
     {
-        monkeySpawner.enabled = false;
+        monkeySpawner.ForEach(spn => spn.enabled = false);
         FindObjectsOfType<MonkeyController>().ToList()
             .ForEach(monkey => monkey.enabled = false);
         endGameMenu.toggleShow(false);
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     public void showEndGameMenu()
     {
         mainMenu.toggleShow(false);
-        monkeySpawner.enabled = false;
+        monkeySpawner.ForEach(spn => spn.enabled = false);
         endGameMenu.toggleShow(true);
 
         introCutScene.toggleShow(false);
