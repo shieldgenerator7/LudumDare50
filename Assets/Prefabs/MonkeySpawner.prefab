@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2273876179112346670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4429721359492348987}
+  m_Layer: 0
+  m_Name: BotL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4429721359492348987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2273876179112346670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.67, y: -4.92, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3449123111310731191}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3449123111310731189
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,6 +67,7 @@ Transform:
   - {fileID: 3449123112646688744}
   - {fileID: 3449123111906768230}
   - {fileID: 3449123113102149502}
+  - {fileID: 4429721359492348987}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,15 +84,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monkeySpawnCooldownDuration: 1
-  monkeyPrefab: {fileID: 7533833176745291931, guid: 1618f702eb4f54b4c92b05f675601b14, type: 3}
+  monkeyPrefab: {fileID: 45390159598503555, guid: d2b68193cf807e3438bbabfa7c0866a8, type: 3}
   spawnPoints:
-  - {fileID: 3449123112512105903}
-  - {fileID: 3449123113056573139}
-  - {fileID: 3449123112601127258}
-  - {fileID: 3449123111697775288}
-  - {fileID: 3449123112646688744}
-  - {fileID: 3449123111906768230}
-  - {fileID: 3449123113102149502}
+  - {fileID: 4429721359492348987}
 --- !u!1 &3449123111697775287
 GameObject:
   m_ObjectHideFlags: 0
