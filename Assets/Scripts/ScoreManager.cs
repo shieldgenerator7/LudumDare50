@@ -14,6 +14,10 @@ public class ScoreManager : MonoBehaviour
 
     [Header("Components")]
     public PlayerController playerController;
+	public AudioSource gunFire;
+	public AudioSource hitGeneric;
+	public AudioSource hitEnemy;
+	public AudioSource bananaGet;  
 
     private int score = 0;
     public int Score
@@ -51,12 +55,16 @@ public class ScoreManager : MonoBehaviour
 
     void coconutLaunched(CoconutController coconut)
     {
+		//gunFire = GetComponent<AudioSource>();
+		gunFire.Play(0);
         Score -= coconutScoreCost;
         coconut.onHitCountUpdated += coconutHit;
+		
     }
 
     void coconutHit(int hitCount)
     {
+		hitGeneric.Play(0);	
         Score += scoreOnHit + (int)((hitCount - 1) * scoreOnHitExtra);
     }
 
