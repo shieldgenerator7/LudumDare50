@@ -16,8 +16,7 @@ public class PlayerController : MonoBehaviour
     [Header("Component")]
     public GameObject coconutPrefab;
     public Transform launchPoint;
-    public Transform pivotPoint;    
-	public AudioSource gunCharge;
+    public Transform pivotPoint;
 
     [Header("Accessibility Options")]
     public LaunchControlOption launchControlOption;
@@ -99,20 +98,18 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-			gunCharge.Play();	
             if (readyToShoot)
             {
-					
+
                 Charge += chargePerSecond * Time.deltaTime;
             }
         }
         else if (Input.GetButtonUp("Fire1"))
         {
-			gunCharge.Stop();
             if (readyToShoot && Time.time >= lastLaunchTime + launchCooldownDuration)
             {
-				
-				
+
+
                 launchCoconut(ChargePercent);
             }
             Charge = 0;
@@ -126,23 +123,20 @@ public class PlayerController : MonoBehaviour
         {
             if (charge == 0)
             {
-				
+
                 Charge = 0.01f;
             }
             else
             {
-				gunCharge.Play();
                 if (Time.time >= lastLaunchTime + launchCooldownDuration)
                 {
                     launchCoconut(ChargePercent);
-					gunCharge.Stop();	
                     Charge = 0;
                 }
             }
         }
         if (charge > 0)
         {
-			gunCharge.Stop();		
             Charge += chargePerSecond * Time.deltaTime;
         }
     }

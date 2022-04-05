@@ -26,11 +26,14 @@ public class SoundManager : MonoBehaviour
 
     void onChargeChanged(float charge)
     {
-        if (charge > 0 && charge < 0.5f)
+        if (charge > 0)
         {
-            gunCharge.Play();
+            if (!gunCharge.isPlaying)
+            {
+                gunCharge.Play();
+            }
         }
-        else if (charge == 0)
+        else
         {
             gunCharge.Stop();
         }
