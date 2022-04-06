@@ -381,11 +381,11 @@ public class GridAI : MonoBehaviour
     {
         if (hasBanana)
         {
-            speed = Random.Range(.1f, 2f);
+            speed = Random.Range(.6f, 2f);
         }
         else
         {
-            speed = Random.Range(2f, 4f);
+            speed = Random.Range(2.5f, 4f);
         }
 
     }

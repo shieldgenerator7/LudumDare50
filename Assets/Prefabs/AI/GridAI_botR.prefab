@@ -265,6 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9087128175077330529}
   - component: {fileID: 9087128175077330530}
+  - component: {fileID: 2867881999652751595}
   m_Layer: 7
   m_Name: GridAI_botR
   m_TagString: Untagged
@@ -311,7 +312,21 @@ MonoBehaviour:
   endX: 0
   endY: 0
   hasBanana: 0
+  inTrees: 0
   exitRight: 1
   findDistance: 1
   objectToMove: {fileID: 643736653949569839}
   speed: 10
+--- !u!114 &2867881999652751595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9087128175077330531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61304805f9fb0e4e8f2f90815e71e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 30
