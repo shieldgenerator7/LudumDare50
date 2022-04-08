@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public MenuBar endGameMenu;
     public Projector introCutScene;
     public Projector endCutScene;
+	public GameObject instruct;
 
     public ScoreManager scoreManager;
     public BananaManager bananaManager;
@@ -62,6 +63,9 @@ public class GameManager : MonoBehaviour
 
         introCutScene.toggleShow(false);
         endCutScene.toggleShow(false);
+		
+		 instruct.SetActive(true);
+
     }
 
     public void endGame()
