@@ -4,25 +4,38 @@ using UnityEngine;
 
 public class GridAI : MonoBehaviour
 {
-    public Vector2 moveDir { get; private set; }
+    [Header("Settings")]
+    [SerializeField]
+    private  bool inTrees = false;
+    [SerializeField]
+    private bool exitRight = false;
+    [SerializeField]
+    private float minSpeed = 2.5f;
+    [SerializeField]
+    private float maxSpeed = 4.0f;
+    [SerializeField]
+    private float minSpeedBanana = 0.6f;
+    [SerializeField]
+    private float maxSpeedBanana = 2.0f;
 
-    public List<GridStats> path = new List<GridStats>();
+    [Header("Components")]
+    public Transform objectToMove;
+
+
+    private List<GridStats> path = new List<GridStats>();
 
     //startX and startY are my starting position
-    [SerializeField]
     int startX = 0;
-    [SerializeField]
     int startY = 0;
     //endX and endY are my ending position on the grid
-    [SerializeField]
     int endX = 0;
-    [SerializeField]
     int endY = 0;
-    [SerializeField]
-    bool hasBanana = false;
-    [SerializeField]
-    bool inTrees = false;
 
+    private float speed = 3;
+    private int moveStep = 0;
+    public Vector2 moveDir { get; private set; }
+
+    bool hasBanana = false;
     public bool HasBanana
     {
         get => hasBanana;
@@ -34,11 +47,9 @@ public class GridAI : MonoBehaviour
     }
     public delegate void OnHasBananaChanged(bool has);
     public event OnHasBananaChanged onHasBananaChanged;
-    [SerializeField]
-    bool exitRight = false;
 
     //find distance starts the process of moving
-    public bool findDistance = true;
+    bool findDistance = true;
 
     //entrance/ exit ground left				10, 0
     //entrance/ exit ground right 				0, 0
@@ -46,16 +57,6 @@ public class GridAI : MonoBehaviour
     //sneaky entrance left						0, 4
     //sneaky entrance right						10, 4
 
-    public Transform objectToMove;
-    public float minSpeed = 2.5f;
-    public float maxSpeed = 4.0f;
-    public float minSpeedBanana = 0.6f;
-    public float maxSpeedBanana = 2.0f;
-
-    private float speed = 3;
-    private int moveStep = 0;
-
-    // Start is called before the first frame update
     void Awake()
     {
         if (inTrees)
