@@ -73,39 +73,47 @@ public class AIGridManager : MonoBehaviour
         });
     }
 
+    VisitData[,] getFreshVisitDataArray()
+    {
+        VisitData[,] visitArray = new VisitData[columns, rows];
+        foreach (GridStats gridStats in gridArray)
+        {
+            if (gridStats)
+            {
+                VisitData visit = new VisitData();
+                visit.visited = -1;
+                visitArray[gridStats.x, gridStats.y] = visit;
+            }
+        }
+        return visitArray;
     }
 
-    void SetDistance(int startX, int startY)
+    void SetDistance(int startX, int startY, VisitData[,] visitData)
     {
-        InitialSetUp(startX, startY);
-        int x = Mathf.RoundToInt(startX);
-        int y = Mathf.RoundToInt(startY);
-        int[] testArray = new int[rows * columns];
-
         for (int step = 1; step < rows * columns; step++)
         {
             foreach (GridStats gridStats in gridArray)
             {
                 if (gridStats)
                 {
-                    if (gridStats.visited == step - 1)
+                    if (visitData[gridStats.x, gridStats.y].visited == step - 1)
                     {
-                        TestFourDirections(gridStats.x, gridStats.y, step);
+                        TestFourDirections(gridStats.x, gridStats.y, step, visitData);
                     }
                 }
             }
         }
     }
-    void InitialSetUp(int startX, int startY)
+    void InitialSetUp(int startX, int startY, VisitData[,] visitData)
     {
-        foreach (GridStats gridStats in gridArray)
+        for (int i = 0; i < columns; i++)
         {
-            if (gridStats)
+            for (int j = 0; j < rows; j++)
             {
-                gridStats.visited = -1;
+                SetVisited(i, j, -1, visitData);
             }
         }
-        gridArray[startX, startY].visited = 0;
+        SetVisited(startX, startY, 0, visitData);
     }
 
     public List<GridStats> GetPath(int startX, int startY, int endX, int endY)
@@ -116,29 +124,32 @@ public class AIGridManager : MonoBehaviour
             return new List<GridStats>();
         }
 
-        int x = endX;
-        int y = endY;
-        int step = gridArray[x, y].visited - 1;
         List<GridStats> path = new List<GridStats>();
         List<GridStats> optionsList = new List<GridStats>();
+        VisitData[,] visitData = getFreshVisitDataArray();
+        InitialSetUp(startX, startY, visitData);
+        SetDistance(startX, startY, visitData);
 
+        int x = endX;
+        int y = endY;
+        int step = GetVisit(gridArray[x, y], visitData) - 1;
         path.Add(gridArray[x, y]);
 
         for (; step > -1; step--)
         {
-            if (TestDirection(x, y, step, Direction.UP))
+            if (TestDirection(x, y, step, Direction.UP, visitData))
             {
                 optionsList.Add(gridArray[x, y + 1]);
             }
-            if (TestDirection(x, y, step, Direction.RIGHT))
+            if (TestDirection(x, y, step, Direction.RIGHT, visitData))
             {
                 optionsList.Add(gridArray[x + 1, y]);
             }
-            if (TestDirection(x, y, step, Direction.DOWN))
+            if (TestDirection(x, y, step, Direction.DOWN, visitData))
             {
                 optionsList.Add(gridArray[x, y - 1]);
             }
-            if (TestDirection(x, y, step, Direction.LEFT))
+            if (TestDirection(x, y, step, Direction.LEFT, visitData))
             {
                 optionsList.Add(gridArray[x - 1, y]);
             }
@@ -151,57 +162,74 @@ public class AIGridManager : MonoBehaviour
         return path;
     }
 
-    void TestFourDirections(int x, int y, int step)
+    void TestFourDirections(int x, int y, int step, VisitData[,] visitData)
     {
-        if (TestDirection(x, y, -1, Direction.UP))
+        if (TestDirection(x, y, -1, Direction.UP, visitData))
         {
-            SetVisited(x, y + 1, step);
+            SetVisited(x, y + 1, step, visitData);
         }
-        if (TestDirection(x, y, -1, Direction.RIGHT))
+        if (TestDirection(x, y, -1, Direction.RIGHT, visitData))
         {
-            SetVisited(x + 1, y, step);
+            SetVisited(x + 1, y, step, visitData);
         }
-        if (TestDirection(x, y, -1, Direction.DOWN))
+        if (TestDirection(x, y, -1, Direction.DOWN, visitData))
         {
-            SetVisited(x, y - 1, step);
+            SetVisited(x, y - 1, step, visitData);
         }
-        if (TestDirection(x, y, -1, Direction.LEFT))
+        if (TestDirection(x, y, -1, Direction.LEFT, visitData))
         {
-            SetVisited(x - 1, y, step);
+            SetVisited(x - 1, y, step, visitData);
         }
     }
 
-    bool TestDirection(int x, int y, int step, Direction direction)
+    bool TestDirection(int x, int y, int step, Direction direction, VisitData[,] visitData)
     {
         //int direction tells which case to use. 1 is up, 2, is to the right, 3 is bottom, 4 is to the left.
         switch (direction)
         {
             case Direction.UP:
-                return HasBeenVisited(x, y + 1, step);
+                return HasBeenVisited(x, y + 1, step, visitData);
             case Direction.RIGHT:
-                return HasBeenVisited(x + 1, y, step);
+                return HasBeenVisited(x + 1, y, step, visitData);
             case Direction.DOWN:
-                return HasBeenVisited(x, y - 1, step);
+                return HasBeenVisited(x, y - 1, step, visitData);
             case Direction.LEFT:
-                return HasBeenVisited(x - 1, y, step);
+                return HasBeenVisited(x - 1, y, step, visitData);
             default:
                 throw new System.NotImplementedException($"Direction not recognized: {direction}");
         }
     }
-    bool HasBeenVisited(int x, int y, int step)
+    bool HasBeenVisited(int x, int y, int step, VisitData[,] visitData)
     {
         return x >= 0 && x < columns
             && y >= 0 && y < rows
             && gridArray[x, y]
-            && gridArray[x, y].visited == step
+            && GetVisit(gridArray[x, y], visitData) == step
             ;
     }
-    void SetVisited(int x, int y, int step)
+    void SetVisited(int x, int y, int step, VisitData[,] visitData)
     {
-        if (gridArray[x, y] != null)
+        GridStats gridStats = gridArray[x, y];
+        if (gridStats)
         {
-            gridArray[x, y].visited = step;
+            visitData[gridStats.x, gridStats.y].visited = step;
         }
+    }
+    int GetVisit(GridStats gridStats, VisitData[,] visitData)
+    {
+        if (!gridStats)
+        {
+            return -1;
+        }
+        return visitData[gridStats.x, gridStats.y].visited;
+    }
+    VisitData GetVisitData(GridStats gridStats, VisitData[,] visitData)
+    {
+        if (!gridStats)
+        {
+            throw new System.ArgumentException($"Can't return any VisitData! gridStats: {gridStats}");
+        }
+        return visitData[gridStats.x, gridStats.y];
     }
     GridStats FindClosest(Transform targetLocation, List<GridStats> list)
     {
