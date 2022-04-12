@@ -7,7 +7,7 @@ public class GridAI : MonoBehaviour
     public Vector2 moveDir { get; private set; }
 
     public List<GridStats> path = new List<GridStats>();
-    
+
     //startX and startY are my starting position
     [SerializeField]
     int startX = 0;
@@ -41,11 +41,10 @@ public class GridAI : MonoBehaviour
     public bool findDistance = true;
 
     //entrance/ exit ground left				10, 0
-    //entrance/ exit ground right 				0, 0 
+    //entrance/ exit ground right 				0, 0
     //banana hoard 								5, 5
     //sneaky entrance left						0, 4
-    //sneaky entrance right						10, 4			
-
+    //sneaky entrance right						10, 4
 
     public Transform objectToMove;
     public float minSpeed = 2.5f;
@@ -101,7 +100,7 @@ public class GridAI : MonoBehaviour
         }
 
     }
-   
+
 
     void SetDistance()
     {
@@ -141,7 +140,7 @@ public class GridAI : MonoBehaviour
                 moveStep = moveStep - 1;
             }
         }
-    }    
+    }
 
     void SetTargetPosition()
     {
