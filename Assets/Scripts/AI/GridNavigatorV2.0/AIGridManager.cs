@@ -31,8 +31,10 @@ public class AIGridManager : MonoBehaviour
     //banana hoard 								5, 5
     //sneaky entrance left						0, 4
     //sneaky entrance right						10, 4			
+    private static AIGridManager instance;
     private void Awake()
     {
+        instance ??= this;
         populateGridArray();
     }
     public void GenerateGridObjects()
@@ -116,7 +118,11 @@ public class AIGridManager : MonoBehaviour
         SetVisited(startX, startY, 0, visitData);
     }
 
-    public List<GridStats> GetPath(int startX, int startY, int endX, int endY)
+    public static List<GridStats> GetPath(int startX, int startY, int endX, int endY)
+    {
+        return instance._GetPath(startX, startY, endX, endY);
+    }
+    private List<GridStats> _GetPath(int startX, int startY, int endX, int endY)
     {
         if (!gridArray[endX, endY] || (startX == endX && startY == endY))
         {
