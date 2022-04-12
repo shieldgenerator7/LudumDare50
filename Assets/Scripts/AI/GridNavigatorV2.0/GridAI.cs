@@ -48,8 +48,13 @@ public class GridAI : MonoBehaviour
 
 
     public Transform objectToMove;
-    public float speed = 3;
-    int moveStep = 0;
+    public float minSpeed = 2.5f;
+    public float maxSpeed = 4.0f;
+    public float minSpeedBanana = 0.6f;
+    public float maxSpeedBanana = 2.0f;
+
+    private float speed = 3;
+    private int moveStep = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -67,7 +72,7 @@ public class GridAI : MonoBehaviour
         if (inTrees)
         {
             SetTargetPositionTrees();
-            SetSpeedTrees();
+            SetSpeed();
             if (path.Count > 0)
             {
                 findDistance = false;
@@ -166,11 +171,11 @@ public class GridAI : MonoBehaviour
     {
         if (hasBanana)
         {
-            speed = Random.Range(.6f, 2f);
+            speed = Random.Range(minSpeedBanana, maxSpeedBanana);
         }
         else
         {
-            speed = Random.Range(2.5f, 4f);
+            speed = Random.Range(minSpeed, maxSpeed);
         }
     }
 
@@ -205,18 +210,6 @@ public class GridAI : MonoBehaviour
         {
             endX = 5;
             endY = 4;
-        }
-    }
-
-    void SetSpeedTrees()
-    {
-        if (hasBanana)
-        {
-            speed = Random.Range(.1f, 1.5f);
-        }
-        else
-        {
-            speed = Random.Range(1f, 4f);
         }
     }
 }
