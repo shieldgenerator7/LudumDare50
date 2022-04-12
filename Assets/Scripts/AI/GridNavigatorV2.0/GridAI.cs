@@ -193,7 +193,7 @@ public class GridAI : MonoBehaviour
     {
         if (startX == 5 && startY == 4)
         {
-            hasBanana = true;
+            HasBanana = true;
             if (exitRight)
             {
                 endX = 10;
