@@ -277,8 +277,15 @@ public class GridAI : MonoBehaviour
         if (step > -1 && path.Count > 0 && step < path.Count)
         {
             moveDir = (path[step].transform.position - obj.position).normalized;
-            obj.position = Vector3.MoveTowards(obj.position, path[step].transform.position, speed * Time.deltaTime);
-            float dist = Vector3.Distance(obj.transform.position, path[step].transform.localPosition);
+            obj.position = Vector3.MoveTowards(
+                obj.position, 
+                path[step].transform.position, 
+                speed * Time.deltaTime
+                );
+            float dist = Vector3.Distance(
+                obj.transform.position, 
+                path[step].transform.localPosition
+                );
             if (dist < .05f)
             {
                 startX = path[step].GetComponent<GridStats>().x;

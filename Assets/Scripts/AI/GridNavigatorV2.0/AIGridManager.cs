@@ -6,15 +6,16 @@ using UnityEngine;
 public class AIGridManager : MonoBehaviour
 {
     [SerializeField]
-    int rows = 10;
+    private int rows = 10;
     [SerializeField]
-    int columns = 10;
+    private int columns = 10;
     [SerializeField]
-    float scale = 1.7f;
+    private float scale = 1.7f;
     [SerializeField]
-    GameObject gridPrefab;
+    private GameObject gridPrefab;
     [SerializeField]
-    Vector3 leftBottomLocation = new Vector3(0, 0, 0);
+    private Vector3 leftBottomLocation = new Vector3(0, 0, 0);
+
     private GridStats[,] gridArray;
 
     public enum Direction
@@ -44,7 +45,15 @@ public class AIGridManager : MonoBehaviour
         {
             for (int j = 0; j < rows; j++)
             {
-                GameObject obj = Instantiate(gridPrefab, new Vector3(leftBottomLocation.x + scale * i, leftBottomLocation.y + scale * j, leftBottomLocation.z), Quaternion.identity);
+                GameObject obj = Instantiate(
+                    gridPrefab,
+                    new Vector3(
+                        leftBottomLocation.x + scale * i,
+                        leftBottomLocation.y + scale * j,
+                        leftBottomLocation.z
+                        ),
+                    Quaternion.identity
+                    );
                 obj.transform.SetParent(gameObject.transform);
                 GridStats gridStats = obj.GetComponent<GridStats>();
                 gridStats.scale = scale;
@@ -62,7 +71,8 @@ public class AIGridManager : MonoBehaviour
         {
             gridArray[gridStats.x, gridStats.y] = gridStats;
         });
-        ResetGridArrary();
+    }
+
     }
 
     void SetDistance(int startX, int startY)
@@ -91,9 +101,11 @@ public class AIGridManager : MonoBehaviour
         foreach (GridStats gridStats in gridArray)
         {
             if (gridStats)
+            {
                 gridStats.visited = -1;
+            }
         }
-        gridArray[Mathf.RoundToInt(startX), Mathf.RoundToInt(startY)].visited = 0;
+        gridArray[startX, startY].visited = 0;
     }
 
     public List<GridStats> GetPath(int startX, int startY, int endX, int endY)
@@ -112,7 +124,7 @@ public class AIGridManager : MonoBehaviour
 
         path.Add(gridArray[x, y]);
 
-        for (int i = step; step > -1; step--)
+        for (; step > -1; step--)
         {
             if (TestDirection(x, y, step, Direction.UP))
             {
@@ -125,7 +137,6 @@ public class AIGridManager : MonoBehaviour
             if (TestDirection(x, y, step, Direction.DOWN))
             {
                 optionsList.Add(gridArray[x, y - 1]);
-
             }
             if (TestDirection(x, y, step, Direction.LEFT))
             {
@@ -166,16 +177,24 @@ public class AIGridManager : MonoBehaviour
         switch (direction)
         {
             case Direction.UP:
-                return (y + 1 < rows && gridArray[x, y + 1] && gridArray[x, y + 1].visited == step);
+                return HasBeenVisited(x, y + 1, step);
             case Direction.RIGHT:
-                return (x + 1 < columns && gridArray[x + 1, y] && gridArray[x + 1, y].visited == step);
+                return HasBeenVisited(x + 1, y, step);
             case Direction.DOWN:
-                return (y - 1 > -1 && gridArray[x, y - 1] && gridArray[x, y - 1].visited == step);
+                return HasBeenVisited(x, y - 1, step);
             case Direction.LEFT:
-                return (x - 1 > -1 && gridArray[x - 1, y] && gridArray[x - 1, y].visited == step);
+                return HasBeenVisited(x - 1, y, step);
             default:
                 throw new System.NotImplementedException($"Direction not recognized: {direction}");
         }
+    }
+    bool HasBeenVisited(int x, int y, int step)
+    {
+        return x >= 0 && x < columns
+            && y >= 0 && y < rows
+            && gridArray[x, y]
+            && gridArray[x, y].visited == step
+            ;
     }
     void SetVisited(int x, int y, int step)
     {
@@ -191,24 +210,14 @@ public class AIGridManager : MonoBehaviour
 
         for (int i = 0; i < list.Count; i++)
         {
-            if (Vector3.Distance(targetLocation.position, list[i].transform.position) < currentDistance)
+            float newDistance = Vector3.Distance(targetLocation.position, list[i].transform.position);
+            if (newDistance < currentDistance)
             {
-                currentDistance = Vector3.Distance(targetLocation.position, list[i].transform.position);
-
+                currentDistance = newDistance;
                 indexNumber = i;
             }
         }
         return list[indexNumber];
-    }
-    void ResetGridArrary()
-    {
-        foreach (GridStats gridStats in gridArray)
-        {
-            if (gridStats)
-            {
-                gridStats.visited = -1;
-            }
-        }
     }
 
 }
