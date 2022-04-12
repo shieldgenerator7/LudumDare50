@@ -17,6 +17,14 @@ public class AIGridManager : MonoBehaviour
     Vector3 leftBottomLocation = new Vector3(0, 0, 0);
     private GridStats[,] gridArray;
 
+    public enum Direction
+    {
+        UP = 1,
+        RIGHT = 2,
+        DOWN = 3,
+        LEFT = 4,
+    }
+
     //entrance/ exit ground left				10, 0
     //entrance/ exit ground right 				0, 0 
     //banana hoard 								5, 5
@@ -109,23 +117,23 @@ public class AIGridManager : MonoBehaviour
         }
         for (int i = step; step > -1; step--)
         {
-            if (TestDirection(x, y, step, 1))
+            if (TestDirection(x, y, step, Direction.UP))
             {
                 tempList.Add(gridArray[x, y + 1]);
                 // y = y + 1;
             }
-            if (TestDirection(x, y, step, 2))
+            if (TestDirection(x, y, step, Direction.RIGHT))
             {
                 tempList.Add(gridArray[x + 1, y]);
                 // x = x + 1;
             }
-            if (TestDirection(x, y, step, 3))
+            if (TestDirection(x, y, step, Direction.DOWN))
             {
                 tempList.Add(gridArray[x, y - 1]);
                 // y = y - 1;
 
             }
-            if (TestDirection(x, y, step, 4))
+            if (TestDirection(x, y, step, Direction.LEFT))
             {
                 tempList.Add(gridArray[x - 1, y]);
                 //  x = x - 1;
@@ -141,42 +149,47 @@ public class AIGridManager : MonoBehaviour
 
     void TestFourDirections(int x, int y, int step)
     {
-        if (TestDirection(x, y, -1, 1))
+        if (TestDirection(x, y, -1, Direction.UP))
+        {
             SetVisited(x, y + 1, step);
-        if (TestDirection(x, y, -1, 2))
+        }
+        if (TestDirection(x, y, -1, Direction.RIGHT))
+        {
             SetVisited(x + 1, y, step);
-        if (TestDirection(x, y, -1, 3))
+        }
+        if (TestDirection(x, y, -1, Direction.DOWN))
+        {
             SetVisited(x, y - 1, step);
-        if (TestDirection(x, y, -1, 4))
+        }
+        if (TestDirection(x, y, -1, Direction.LEFT))
+        {
             SetVisited(x - 1, y, step);
+        }
     }
 
-    bool TestDirection(int x, int y, int step, int direction)
+    bool TestDirection(int x, int y, int step, Direction direction)
     {
         //int direction tells which case to use. 1 is up, 2, is to the right, 3 is bottom, 4 is to the left.
         switch (direction)
         {
-            case 4:
-                return (x - 1 > -1 && gridArray[x - 1, y] && gridArray[x - 1, y].visited == step);
-            case 3:
+            case Direction.UP:
+                return (y + 1 < rows && gridArray[x, y + 1] && gridArray[x, y + 1].visited == step);
+            case Direction.RIGHT:
+                return (x + 1 < columns && gridArray[x + 1, y] && gridArray[x + 1, y].visited == step);
+            case Direction.DOWN:
                 return (y - 1 > -1 && gridArray[x, y - 1] && gridArray[x, y - 1].visited == step);
-            case 2:
-                if (x + 1 < columns && gridArray[x + 1, y] && gridArray[x + 1, y].visited == step)
-                    return true;
-                else
-                    return false;
-            case 1:
-                if (y + 1 < rows && gridArray[x, y + 1] && gridArray[x, y + 1].visited == step)
-                    return true;
-                else
-                    return false;
+            case Direction.LEFT:
+                return (x - 1 > -1 && gridArray[x - 1, y] && gridArray[x - 1, y].visited == step);
+            default:
+                throw new System.NotImplementedException($"Direction not recognized: {direction}");
         }
-        return false;
     }
     void SetVisited(int x, int y, int step)
     {
         if (gridArray[x, y] != null)
-            gridArray[x, y].GetComponent<GridStats>().visited = step;
+        {
+            gridArray[x, y].visited = step;
+        }
     }
     GridStats FindClosest(Transform targetLocation, List<GridStats> list)
     {
@@ -201,7 +214,6 @@ public class AIGridManager : MonoBehaviour
             if (gridStats)
             {
                 gridStats.visited = -1;
-
             }
         }
     }
