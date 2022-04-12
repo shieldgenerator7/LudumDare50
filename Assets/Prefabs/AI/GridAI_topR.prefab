@@ -46,22 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5ef77299121bc40a076200a55d6f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: []
-  rows: 6
-  columns: 11
-  scale: 1.7
-  gridPrefab: {fileID: 984992003093079696, guid: 00d3b164b1e31724392158ba8ca459b5, type: 3}
-  leftBottomLocation: {x: 0, y: 0, z: 0}
-  startX: 0
-  startY: 0
-  endX: 0
-  endY: 0
-  hasBanana: 0
   inTrees: 1
   exitRight: 1
-  findDistance: 1
+  minSpeed: 1
+  maxSpeed: 4
+  minSpeedBanana: 0.1
+  maxSpeedBanana: 1.5
   objectToMove: {fileID: 45390160135253445}
-  speed: 10
 --- !u!114 &-2531480889664792010
 MonoBehaviour:
   m_ObjectHideFlags: 0
