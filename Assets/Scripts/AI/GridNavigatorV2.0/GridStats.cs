@@ -8,9 +8,4 @@ public class GridStats : MonoBehaviour
     public float scale = 1;
     public int x;
     public int y;
-    public int visited
-    {
-        get => throw new System.Exception("Use VisitData.visited instead");
-        set => throw new System.Exception("Use VisitData.visited instead");
-    }
 }
