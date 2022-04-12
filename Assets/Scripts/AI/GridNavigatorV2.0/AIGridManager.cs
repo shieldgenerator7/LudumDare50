@@ -96,55 +96,48 @@ public class AIGridManager : MonoBehaviour
         gridArray[Mathf.RoundToInt(startX), Mathf.RoundToInt(startY)].visited = 0;
     }
 
-    void SetPath(int endX, int endY)
+    public List<GridStats> GetPath(int startX, int startY, int endX, int endY)
     {
-        int step;
+        if (!gridArray[endX, endY] || (startX == endX && startY == endY))
+        {
+            Debug.LogWarning("Can't reach the desired location or you are currently at the position.");
+            return new List<GridStats>();
+        }
+
         int x = endX;
         int y = endY;
-        List<GridStats> tempList = new List<GridStats>();
+        int step = gridArray[x, y].visited - 1;
         List<GridStats> path = new List<GridStats>();
-        path.Clear();
-        if (gridArray[endX, endY] && gridArray[endX, endY].GetComponent<GridStats>().visited > 0)
-        {
-            path.Add(gridArray[x, y]);
-            step = gridArray[x, y].GetComponent<GridStats>().visited - 1;
-        }
-        else
-        {
+        List<GridStats> optionsList = new List<GridStats>();
 
-            print("Can't reach the desired location or you are currently at the position.");
-            return;
-        }
+        path.Add(gridArray[x, y]);
+
         for (int i = step; step > -1; step--)
         {
             if (TestDirection(x, y, step, Direction.UP))
             {
-                tempList.Add(gridArray[x, y + 1]);
-                // y = y + 1;
+                optionsList.Add(gridArray[x, y + 1]);
             }
             if (TestDirection(x, y, step, Direction.RIGHT))
             {
-                tempList.Add(gridArray[x + 1, y]);
-                // x = x + 1;
+                optionsList.Add(gridArray[x + 1, y]);
             }
             if (TestDirection(x, y, step, Direction.DOWN))
             {
-                tempList.Add(gridArray[x, y - 1]);
-                // y = y - 1;
+                optionsList.Add(gridArray[x, y - 1]);
 
             }
             if (TestDirection(x, y, step, Direction.LEFT))
             {
-                tempList.Add(gridArray[x - 1, y]);
-                //  x = x - 1;
+                optionsList.Add(gridArray[x - 1, y]);
             }
-            GridStats tempObj = FindClosest(gridArray[endX, endY].transform, tempList);
+            GridStats tempObj = FindClosest(gridArray[endX, endY].transform, optionsList);
             path.Add(tempObj);
-            x = tempObj.GetComponent<GridStats>().x;
-            y = tempObj.GetComponent<GridStats>().y;
-            tempList.Clear();
-
+            x = tempObj.x;
+            y = tempObj.y;
+            optionsList.Clear();
         }
+        return path;
     }
 
     void TestFourDirections(int x, int y, int step)
