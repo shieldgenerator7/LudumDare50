@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AIGridManager : MonoBehaviour
@@ -14,7 +15,7 @@ public class AIGridManager : MonoBehaviour
     GameObject gridPrefab;
     [SerializeField]
     Vector3 leftBottomLocation = new Vector3(0, 0, 0);
-    public GridStats[,] gridArray;
+    private GridStats[,] gridArray;
 
     //entrance/ exit ground left				10, 0
     //entrance/ exit ground right 				0, 0 
@@ -23,44 +24,14 @@ public class AIGridManager : MonoBehaviour
     //sneaky entrance right						10, 4			
     private void Awake()
     {
-        gridArray = new GridStats[columns, rows];
-        if (gridPrefab)
-        {
-            GenerateGrid();
-            gameObject.DeleteChildrenWithName(new[]{
-                "grid01",
-                "grid02",
-                "grid03",
-                "grid05",
-                "grid11",
-                "grid12",
-                "grid13",
-                "grid15",
-                "grid25",
-                "grid35",
-                "grid45",
-                "grid55",
-                "grid65",
-                "grid75",
-                "grid85",
-                "grid91",
-                "grid92",
-                "grid93",
-                "grid95",
-                "grid101",
-                "grid102",
-                "grid103",
-                "grid105",
-            });
-        }
-        else
-        {
-            print("Missing assigned gridPrefab");
-        }
-
+        populateGridArray();
     }
-    void GenerateGrid()
+    public void GenerateGridObjects()
     {
+        if (!gridPrefab)
+        {
+            Debug.LogError($"Missing assigned gridPrefab! gridPrefab: {gridPrefab}");
+        }
         for (int i = 0; i < columns; i++)
         {
             for (int j = 0; j < rows; j++)
@@ -72,9 +43,17 @@ public class AIGridManager : MonoBehaviour
                 gridStats.x = i;
                 gridStats.y = j;
                 obj.name = "grid" + i.ToString() + j.ToString();
-                gridArray[i, j] = gridStats;
             }
         }
+    }
+    void populateGridArray()
+    {
+        gridArray = new GridStats[columns, rows];
+        List<GridStats> gridStatsList = gameObject.GetComponentsInChildren<GridStats>().ToList();
+        gridStatsList.ForEach(gridStats =>
+        {
+            gridArray[gridStats.x, gridStats.y] = gridStats;
+        });
         ResetGridArrary();
     }
 
