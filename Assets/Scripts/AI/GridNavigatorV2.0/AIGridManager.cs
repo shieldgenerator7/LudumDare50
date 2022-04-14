@@ -62,7 +62,6 @@ public class AIGridManager : MonoBehaviour
                     );
                 obj.transform.SetParent(gameObject.transform);
                 GridStats gridStats = obj.GetComponent<GridStats>();
-                gridStats.scale = scale;
                 gridStats.v = new Vector2Int(i, j);
                 obj.name = "grid" + i.ToString() + j.ToString();
             }
