@@ -6,7 +6,7 @@ public class GridAI : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField]
-    private  bool inTrees = false;
+    private bool inTrees = false;
     [SerializeField]
     private bool exitRight = false;
     [SerializeField]
@@ -24,12 +24,10 @@ public class GridAI : MonoBehaviour
 
     private List<GridStats> path = new List<GridStats>();
 
-    //startX and startY are my starting position
-    int startX = 0;
-    int startY = 0;
-    //endX and endY are my ending position on the grid
-    int endX = 0;
-    int endY = 0;
+    //startV is my starting position on the grid
+    Vector2Int startV;
+    //endV is my ending position on the grid
+    Vector2Int endV;
 
     private float speed = 3;
     private int moveStep = 0;
@@ -112,7 +110,7 @@ public class GridAI : MonoBehaviour
     void SetPath()
     {
         path.Clear();
-        path = AIGridManager.GetPath(startX, startY, endX, endY);
+        path = AIGridManager.GetPath(startV, endV);
     }
 
 
@@ -135,8 +133,7 @@ public class GridAI : MonoBehaviour
                 );
             if (dist < .05f)
             {
-                startX = gridStats.x;
-                startY = gridStats.y;
+                startV = gridStats.v;
                 path.RemoveAt(step);
                 moveStep = moveStep - 1;
             }
@@ -145,25 +142,22 @@ public class GridAI : MonoBehaviour
 
     void SetTargetPosition()
     {
-        if (startX == 5 && startY == 4)
+        if (startV.x == 5 && startV.y == 4)
         {
             HasBanana = true;
             if (exitRight)
             {
-                endX = 10;
-                endY = 0;
+                endV = new Vector2Int(10, 0);
             }
             else
             {
-                endX = 0;
-                endY = 0;
+                endV = new Vector2Int(0, 0);
             }
             findDistance = true;
         }
         else
         {
-            endX = 5;
-            endY = 4;
+            endV = new Vector2Int(5, 4);
         }
     }
 
@@ -181,35 +175,32 @@ public class GridAI : MonoBehaviour
 
     void RandomStart()
     {
-        startX = Mathf.CeilToInt(Random.Range(0f, 10f));
+        startV.x = Mathf.CeilToInt(Random.Range(0f, 10f));
     }
 
     void StartTop()
     {
-        startY = 4;
+        startV.y = 4;
     }
 
     void SetTargetPositionTrees()
     {
-        if (startX == 5 && startY == 4)
+        if (startV.x == 5 && startV.y == 4)
         {
             HasBanana = true;
             if (exitRight)
             {
-                endX = 10;
-                endY = 4;
+                endV = new Vector2Int(10, 4);
             }
             else
             {
-                endX = 0;
-                endY = 4;
+                endV = new Vector2Int(0, 4);
             }
             findDistance = true;
         }
         else
         {
-            endX = 5;
-            endY = 4;
+            endV = new Vector2Int(5, 4);
         }
     }
 }

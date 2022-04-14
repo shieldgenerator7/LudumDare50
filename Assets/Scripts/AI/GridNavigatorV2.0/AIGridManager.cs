@@ -16,15 +16,16 @@ public class AIGridManager : MonoBehaviour
     [SerializeField]
     private Vector3 leftBottomLocation = new Vector3(0, 0, 0);
 
-    private GridStats[,] gridArray;
+    private Dictionary<Vector2Int, GridStats> gridArray;
 
-    public enum Direction
-    {
-        UP = 1,
-        RIGHT = 2,
-        DOWN = 3,
-        LEFT = 4,
-    }
+
+    private static List<Vector2Int> directions = new List<Vector2Int>()
+        {
+            Vector2Int.up,
+            Vector2Int.right,
+            Vector2Int.down,
+            Vector2Int.left,
+        };
 
     //entrance/ exit ground left				10, 0
     //entrance/ exit ground right 				0, 0 
@@ -59,72 +60,71 @@ public class AIGridManager : MonoBehaviour
                 obj.transform.SetParent(gameObject.transform);
                 GridStats gridStats = obj.GetComponent<GridStats>();
                 gridStats.scale = scale;
-                gridStats.x = i;
-                gridStats.y = j;
+                gridStats.v = new Vector2Int(i, j);
                 obj.name = "grid" + i.ToString() + j.ToString();
             }
         }
     }
     void populateGridArray()
     {
-        gridArray = new GridStats[columns, rows];
+        gridArray = new Dictionary<Vector2Int, GridStats>();
         List<GridStats> gridStatsList = gameObject.GetComponentsInChildren<GridStats>().ToList();
         gridStatsList.ForEach(gridStats =>
         {
-            gridArray[gridStats.x, gridStats.y] = gridStats;
+            gridArray[gridStats.v] = gridStats;
         });
     }
 
-    VisitData[,] getFreshVisitDataArray()
+    Dictionary<Vector2Int, VisitData> getFreshVisitDataArray()
     {
-        VisitData[,] visitArray = new VisitData[columns, rows];
-        foreach (GridStats gridStats in gridArray)
+        Dictionary<Vector2Int, VisitData> visitArray = new Dictionary<Vector2Int, VisitData>();
+        foreach (GridStats gridStats in gridArray.Values)
         {
             if (gridStats)
             {
                 VisitData visit = new VisitData();
                 visit.visited = -1;
-                visitArray[gridStats.x, gridStats.y] = visit;
+                visitArray[gridStats.v] = visit;
             }
         }
         return visitArray;
     }
 
-    void SetDistance(int startX, int startY, VisitData[,] visitData)
+    void SetDistance(Dictionary<Vector2Int, VisitData> visitData)
     {
         for (int step = 1; step < rows * columns; step++)
         {
-            foreach (GridStats gridStats in gridArray)
+            foreach (GridStats gridStats in gridArray.Values)
             {
                 if (gridStats)
                 {
-                    if (visitData[gridStats.x, gridStats.y].visited == step - 1)
+                    if (visitData[gridStats.v].visited == step - 1)
                     {
-                        TestFourDirections(gridStats.x, gridStats.y, step, visitData);
+                        TestFourDirections(gridStats.v, step, visitData);
                     }
                 }
             }
         }
     }
-    void InitialSetUp(int startX, int startY, VisitData[,] visitData)
+    void InitialSetUp(Vector2Int startV, Dictionary<Vector2Int, VisitData> visitData)
     {
         for (int i = 0; i < columns; i++)
         {
             for (int j = 0; j < rows; j++)
             {
-                SetVisited(i, j, -1, visitData);
+                SetVisited(new Vector2Int(i, j), -1, visitData);
             }
         }
-        SetVisited(startX, startY, 0, visitData);
+        SetVisited(startV, 0, visitData);
     }
 
-    public static List<GridStats> GetPath(int startX, int startY, int endX, int endY)
+    public static List<GridStats> GetPath(Vector2Int startV, Vector2Int endV)
     {
-        return instance._GetPath(startX, startY, endX, endY);
+        return instance._GetPath(startV, endV);
     }
-    private List<GridStats> _GetPath(int startX, int startY, int endX, int endY)
+    private List<GridStats> _GetPath(Vector2Int startV, Vector2Int endV)
     {
-        if (!gridArray[endX, endY] || (startX == endX && startY == endY))
+        if (!gridArray.ContainsKey(endV) || (startV.x == endV.x && startV.y == endV.y))
         {
             Debug.LogWarning("Can't reach the desired location or you are currently at the position.");
             return new List<GridStats>();
@@ -132,110 +132,70 @@ public class AIGridManager : MonoBehaviour
 
         List<GridStats> path = new List<GridStats>();
         List<GridStats> optionsList = new List<GridStats>();
-        VisitData[,] visitData = getFreshVisitDataArray();
-        InitialSetUp(startX, startY, visitData);
-        SetDistance(startX, startY, visitData);
+        Dictionary<Vector2Int, VisitData> visitData = getFreshVisitDataArray();
+        InitialSetUp(startV, visitData);
+        SetDistance(visitData);
 
-        int x = endX;
-        int y = endY;
-        int step = GetVisit(gridArray[x, y], visitData) - 1;
-        path.Add(gridArray[x, y]);
-
+        Vector2Int v = endV;
+        int step = GetVisit(gridArray[v], visitData) - 1;
+        path.Add(gridArray[v]);
         for (; step > -1; step--)
         {
-            if (TestDirection(x, y, step, Direction.UP, visitData))
-            {
-                optionsList.Add(gridArray[x, y + 1]);
-            }
-            if (TestDirection(x, y, step, Direction.RIGHT, visitData))
-            {
-                optionsList.Add(gridArray[x + 1, y]);
-            }
-            if (TestDirection(x, y, step, Direction.DOWN, visitData))
-            {
-                optionsList.Add(gridArray[x, y - 1]);
-            }
-            if (TestDirection(x, y, step, Direction.LEFT, visitData))
-            {
-                optionsList.Add(gridArray[x - 1, y]);
-            }
-            GridStats tempObj = FindClosest(gridArray[endX, endY].transform, optionsList);
+            directions
+                .FindAll(dir => TestDirection(v, step, dir, visitData))
+                .ForEach(dir => optionsList.Add(gridArray[v + dir]));
+            GridStats tempObj = FindClosest(gridArray[endV].transform, optionsList);
             path.Add(tempObj);
-            x = tempObj.x;
-            y = tempObj.y;
+            v = tempObj.v;
             optionsList.Clear();
         }
         return path;
     }
 
-    void TestFourDirections(int x, int y, int step, VisitData[,] visitData)
+    void TestFourDirections(Vector2Int v, int step, Dictionary<Vector2Int, VisitData> visitData)
     {
-        if (TestDirection(x, y, -1, Direction.UP, visitData))
-        {
-            SetVisited(x, y + 1, step, visitData);
-        }
-        if (TestDirection(x, y, -1, Direction.RIGHT, visitData))
-        {
-            SetVisited(x + 1, y, step, visitData);
-        }
-        if (TestDirection(x, y, -1, Direction.DOWN, visitData))
-        {
-            SetVisited(x, y - 1, step, visitData);
-        }
-        if (TestDirection(x, y, -1, Direction.LEFT, visitData))
-        {
-            SetVisited(x - 1, y, step, visitData);
-        }
+        directions
+            .FindAll(dir => TestDirection(v, -1, dir, visitData))
+            .ForEach(dir => SetVisited(v + dir, step, visitData));
     }
 
-    bool TestDirection(int x, int y, int step, Direction direction, VisitData[,] visitData)
+    bool TestDirection(Vector2Int v, int step, Vector2Int direction, Dictionary<Vector2Int, VisitData> visitData)
     {
-        //int direction tells which case to use. 1 is up, 2, is to the right, 3 is bottom, 4 is to the left.
-        switch (direction)
-        {
-            case Direction.UP:
-                return HasBeenVisited(x, y + 1, step, visitData);
-            case Direction.RIGHT:
-                return HasBeenVisited(x + 1, y, step, visitData);
-            case Direction.DOWN:
-                return HasBeenVisited(x, y - 1, step, visitData);
-            case Direction.LEFT:
-                return HasBeenVisited(x - 1, y, step, visitData);
-            default:
-                throw new System.NotImplementedException($"Direction not recognized: {direction}");
-        }
+        return HasBeenVisited(v + direction, step, visitData);
     }
-    bool HasBeenVisited(int x, int y, int step, VisitData[,] visitData)
+    bool HasBeenVisited(Vector2Int v, int step, Dictionary<Vector2Int, VisitData> visitData)
     {
-        return x >= 0 && x < columns
-            && y >= 0 && y < rows
-            && gridArray[x, y]
-            && GetVisit(gridArray[x, y], visitData) == step
+        return v.x >= 0 && v.x < columns
+            && v.y >= 0 && v.y < rows
+            && gridArray[v]
+            && GetVisit(gridArray[v], visitData) == step
             ;
     }
-    void SetVisited(int x, int y, int step, VisitData[,] visitData)
+    void SetVisited(Vector2Int v, int step, Dictionary<Vector2Int, VisitData> visitData)
     {
-        GridStats gridStats = gridArray[x, y];
+        GridStats gridStats = gridArray[v];
         if (gridStats)
         {
-            visitData[gridStats.x, gridStats.y].visited = step;
+            VisitData vida = visitData[gridStats.v];
+            vida.visited = step;
+            visitData[gridStats.v] = vida;
         }
     }
-    int GetVisit(GridStats gridStats, VisitData[,] visitData)
+    int GetVisit(GridStats gridStats, Dictionary<Vector2Int, VisitData> visitData)
     {
         if (!gridStats)
         {
             return -1;
         }
-        return visitData[gridStats.x, gridStats.y].visited;
+        return visitData[gridStats.v].visited;
     }
-    VisitData GetVisitData(GridStats gridStats, VisitData[,] visitData)
+    VisitData GetVisitData(GridStats gridStats, Dictionary<Vector2Int, VisitData> visitData)
     {
         if (!gridStats)
         {
             throw new System.ArgumentException($"Can't return any VisitData! gridStats: {gridStats}");
         }
-        return visitData[gridStats.x, gridStats.y];
+        return visitData[gridStats.v];
     }
     GridStats FindClosest(Transform targetLocation, List<GridStats> list)
     {

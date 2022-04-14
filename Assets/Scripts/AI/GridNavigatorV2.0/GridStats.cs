@@ -6,6 +6,5 @@ public class GridStats : MonoBehaviour
 {
     //visited is how many moves it takes to get here
     public float scale = 1;
-    public int x;
-    public int y;
+    public Vector2Int v;
 }
