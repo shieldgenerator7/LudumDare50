@@ -44,6 +44,9 @@ public class AIGridManager : MonoBehaviour
         {
             Debug.LogError($"Missing assigned gridPrefab! gridPrefab: {gridPrefab}");
         }
+        //Delete children first, if any
+        gameObject.DeleteChildrenWithNameImmediate(new[]{ "grid"});
+        //Add new children
         for (int i = 0; i < columns; i++)
         {
             for (int j = 0; j < rows; j++)

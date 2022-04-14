@@ -54,4 +54,19 @@ public static class Utility
         }
         children.ForEach(child => Object.Destroy(child));
     }
+
+    public static void DeleteChildrenWithNameImmediate(this GameObject go, string[] names)
+    {
+        go.DeleteChildrenWithNameImmediate(names.ToList());
+    }
+
+    public static void DeleteChildrenWithNameImmediate(this GameObject go, List<string> names)
+    {
+        List<GameObject> children = new List<GameObject>();
+        foreach (string name in names)
+        {
+            children.AddRange(go.getChildrenWithName(name));
+        }
+        children.ForEach(child => Object.DestroyImmediate(child));
+    }
 }
