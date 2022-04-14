@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridStats : MonoBehaviour
+public class GridNode : MonoBehaviour
 {
     public Vector2Int v;
 }

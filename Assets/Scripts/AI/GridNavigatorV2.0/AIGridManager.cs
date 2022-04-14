@@ -16,7 +16,7 @@ public class AIGridManager : MonoBehaviour
     [SerializeField]
     private Vector3 leftBottomLocation = new Vector3(0, 0, 0);
 
-    private Dictionary<Vector2Int, GridStats> gridArray;
+    private Dictionary<Vector2Int, GridNode> gridArray;
 
 
     private static List<Vector2Int> directions = new List<Vector2Int>()
@@ -61,32 +61,32 @@ public class AIGridManager : MonoBehaviour
                     Quaternion.identity
                     );
                 obj.transform.SetParent(gameObject.transform);
-                GridStats gridStats = obj.GetComponent<GridStats>();
-                gridStats.v = new Vector2Int(i, j);
+                GridNode gridNode = obj.GetComponent<GridNode>();
+                gridNode.v = new Vector2Int(i, j);
                 obj.name = "grid" + i.ToString() + j.ToString();
             }
         }
     }
     void populateGridArray()
     {
-        gridArray = new Dictionary<Vector2Int, GridStats>();
-        List<GridStats> gridStatsList = gameObject.GetComponentsInChildren<GridStats>().ToList();
-        gridStatsList.ForEach(gridStats =>
+        gridArray = new Dictionary<Vector2Int, GridNode>();
+        List<GridNode> gridNodeList = gameObject.GetComponentsInChildren<GridNode>().ToList();
+        gridNodeList.ForEach(gridNode =>
         {
-            gridArray[gridStats.v] = gridStats;
+            gridArray[gridNode.v] = gridNode;
         });
     }
 
     Dictionary<Vector2Int, VisitData> getFreshVisitDataArray()
     {
         Dictionary<Vector2Int, VisitData> visitArray = new Dictionary<Vector2Int, VisitData>();
-        foreach (GridStats gridStats in gridArray.Values)
+        foreach (GridNode gridNode in gridArray.Values)
         {
-            if (gridStats)
+            if (gridNode)
             {
                 VisitData visit = new VisitData();
                 visit.visited = -1;
-                visitArray[gridStats.v] = visit;
+                visitArray[gridNode.v] = visit;
             }
         }
         return visitArray;
@@ -96,13 +96,13 @@ public class AIGridManager : MonoBehaviour
     {
         for (int step = 1; step < rows * columns; step++)
         {
-            foreach (GridStats gridStats in gridArray.Values)
+            foreach (GridNode gridNode in gridArray.Values)
             {
-                if (gridStats)
+                if (gridNode)
                 {
-                    if (visitData[gridStats.v].visited == step - 1)
+                    if (visitData[gridNode.v].visited == step - 1)
                     {
-                        TestFourDirections(gridStats.v, step, visitData);
+                        TestFourDirections(gridNode.v, step, visitData);
                     }
                 }
             }
@@ -120,20 +120,20 @@ public class AIGridManager : MonoBehaviour
         SetVisited(startV, 0, visitData);
     }
 
-    public static List<GridStats> GetPath(Vector2Int startV, Vector2Int endV)
+    public static List<GridNode> GetPath(Vector2Int startV, Vector2Int endV)
     {
         return instance._GetPath(startV, endV);
     }
-    private List<GridStats> _GetPath(Vector2Int startV, Vector2Int endV)
+    private List<GridNode> _GetPath(Vector2Int startV, Vector2Int endV)
     {
         if (!gridArray.ContainsKey(endV) || (startV.x == endV.x && startV.y == endV.y))
         {
             Debug.LogWarning("Can't reach the desired location or you are currently at the position.");
-            return new List<GridStats>();
+            return new List<GridNode>();
         }
 
-        List<GridStats> path = new List<GridStats>();
-        List<GridStats> optionsList = new List<GridStats>();
+        List<GridNode> path = new List<GridNode>();
+        List<GridNode> optionsList = new List<GridNode>();
         Dictionary<Vector2Int, VisitData> visitData = getFreshVisitDataArray();
         InitialSetUp(startV, visitData);
         SetDistance(visitData);
@@ -146,7 +146,7 @@ public class AIGridManager : MonoBehaviour
             directions
                 .FindAll(dir => TestDirection(v, step, dir, visitData))
                 .ForEach(dir => optionsList.Add(gridArray[v + dir]));
-            GridStats tempObj = FindClosest(gridArray[endV].transform, optionsList);
+            GridNode tempObj = FindClosest(gridArray[endV].transform, optionsList);
             path.Add(tempObj);
             v = tempObj.v;
             optionsList.Clear();
@@ -175,31 +175,31 @@ public class AIGridManager : MonoBehaviour
     }
     void SetVisited(Vector2Int v, int step, Dictionary<Vector2Int, VisitData> visitData)
     {
-        GridStats gridStats = gridArray[v];
-        if (gridStats)
+        GridNode gridNode = gridArray[v];
+        if (gridNode)
         {
-            VisitData vida = visitData[gridStats.v];
+            VisitData vida = visitData[gridNode.v];
             vida.visited = step;
-            visitData[gridStats.v] = vida;
+            visitData[gridNode.v] = vida;
         }
     }
-    int GetVisit(GridStats gridStats, Dictionary<Vector2Int, VisitData> visitData)
+    int GetVisit(GridNode gridNode, Dictionary<Vector2Int, VisitData> visitData)
     {
-        if (!gridStats)
+        if (!gridNode)
         {
             return -1;
         }
-        return visitData[gridStats.v].visited;
+        return visitData[gridNode.v].visited;
     }
-    VisitData GetVisitData(GridStats gridStats, Dictionary<Vector2Int, VisitData> visitData)
+    VisitData GetVisitData(GridNode gridNode, Dictionary<Vector2Int, VisitData> visitData)
     {
-        if (!gridStats)
+        if (!gridNode)
         {
-            throw new System.ArgumentException($"Can't return any VisitData! gridStats: {gridStats}");
+            throw new System.ArgumentException($"Can't return any VisitData! gridNode: {gridNode}");
         }
-        return visitData[gridStats.v];
+        return visitData[gridNode.v];
     }
-    GridStats FindClosest(Transform targetLocation, List<GridStats> list)
+    GridNode FindClosest(Transform targetLocation, List<GridNode> list)
     {
         float currentDistance = scale * rows + scale * 2 * columns;
         int indexNumber = 0;

@@ -22,7 +22,7 @@ public class GridAI : MonoBehaviour
     public Transform objectToMove;
 
 
-    private List<GridStats> path = new List<GridStats>();
+    private List<GridNode> path = new List<GridNode>();
 
     //startV is my starting position on the grid
     Vector2Int startV;
@@ -120,20 +120,20 @@ public class GridAI : MonoBehaviour
         int step = path.Count - 1;
         if (step > -1 && path.Count > 0 && step < path.Count)
         {
-            GridStats gridStats = path[step];
-            moveDir = (gridStats.transform.position - obj.position).normalized;
+            GridNode gridNode = path[step];
+            moveDir = (gridNode.transform.position - obj.position).normalized;
             obj.position = Vector3.MoveTowards(
                 obj.position,
-                gridStats.transform.position,
+                gridNode.transform.position,
                 speed * Time.deltaTime
                 );
             float dist = Vector3.Distance(
                 obj.transform.position,
-                gridStats.transform.localPosition
+                gridNode.transform.localPosition
                 );
             if (dist < .05f)
             {
-                startV = gridStats.v;
+                startV = gridNode.v;
                 path.RemoveAt(step);
                 moveStep = moveStep - 1;
             }
