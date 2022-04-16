@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour
     public float minLaunchSpeed = 5;
     public float launchSpeed = 15;
 
+	public bool powerUpFire;
+	public GameObject coconutFirePrefab;
+	public bool powerUpLightning;
+	public GameObject coconutLightiningPrefab;
+	public bool powerUpNull;
+	public float waitTime 	= 10.0f;
+    private float timer 	= 0.0f;
+	
     [Header("Component")]
     public GameObject coconutPrefab;
     public Transform launchPoint;
@@ -21,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [Header("Accessibility Options")]
     public LaunchControlOption launchControlOption;
     public enum LaunchControlOption
+	
     {
         HOLD,
         TAP,
@@ -92,6 +101,16 @@ public class PlayerController : MonoBehaviour
         }
         //Animator
         animator.SetFloat("moveSpeed", Mathf.Abs(horizontal));
+		
+		//timer for powerups
+		timer += Time.deltaTime;
+
+        if (timer > waitTime)
+        {
+			powerUpNull = true;
+			powerUpLightning = false; 
+			powerUpFire = false;
+        }
     }
 
     private void checkHoldButton()
@@ -143,16 +162,64 @@ public class PlayerController : MonoBehaviour
 
     private void launchCoconut(float speedPercent)
     {
+		
         readyToShoot = false;
         Vector2 dir = launchPoint.up;// Camera.main.ScreenToWorldPoint(Input.mousePosition) - pivotPoint.position;
-        float speed = (launchSpeed - minLaunchSpeed) * speedPercent + minLaunchSpeed;
-        GameObject coconut = Instantiate(coconutPrefab);
-        coconut.transform.position = launchPoint.position;
-        Rigidbody2D rb2d = coconut.GetComponent<Rigidbody2D>();
-        rb2d.velocity = dir.normalized * speed;
-        lastLaunchTime = Time.time;
-        onCoconutLaunched?.Invoke(coconut.GetComponent<CoconutController>());
+
+		
+		if (powerUpFire){
+			float speed = (launchSpeed - minLaunchSpeed) * speedPercent + minLaunchSpeed;
+			GameObject coconut = Instantiate(coconutFirePrefab);
+			coconut.transform.position = launchPoint.position;
+			Rigidbody2D rb2d = coconut.GetComponent<Rigidbody2D>();
+			rb2d.velocity = dir.normalized * speed;
+			lastLaunchTime = Time.time;
+			onCoconutLaunched?.Invoke(coconut.GetComponent<CoconutController>());			
+		}
+		
+		if (powerUpLightning){
+			float speed = (launchSpeed - minLaunchSpeed) * speedPercent + minLaunchSpeed +10;
+			GameObject coconut = Instantiate(coconutLightiningPrefab);
+			coconut.transform.position = launchPoint.position;
+			Rigidbody2D rb2d = coconut.GetComponent<Rigidbody2D>();
+			rb2d.velocity = dir.normalized * speed;
+			lastLaunchTime = Time.time;
+			onCoconutLaunched?.Invoke(coconut.GetComponent<CoconutController>());
+			
+		}
+		if (powerUpNull){
+			float speed = (launchSpeed - minLaunchSpeed) * speedPercent + minLaunchSpeed +5;
+			GameObject coconut = Instantiate(coconutPrefab);
+			coconut.transform.position = launchPoint.position;
+			Rigidbody2D rb2d = coconut.GetComponent<Rigidbody2D>();
+			rb2d.velocity = dir.normalized * speed;
+			lastLaunchTime = Time.time;
+			onCoconutLaunched?.Invoke(coconut.GetComponent<CoconutController>());
+		}
     }
     public delegate void OnCoconutLaunched(CoconutController coconut);
     public event OnCoconutLaunched onCoconutLaunched;
+	
+	void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "PowerUpFire")
+        {
+			timer = 0.0f;
+			Destroy(other.gameObject);
+			powerUpNull = false;
+			powerUpLightning = false;
+			powerUpFire = true; 
+			
+        }
+		
+		if (other.tag == "PowerUpLightning")
+        {
+			timer = 0.0f;
+			Destroy(other.gameObject);
+			powerUpNull = false;
+			powerUpLightning = true; 
+			powerUpFire = false;
+        }
+		
+    }
 }
