@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5041528179886737266}
   - component: {fileID: 4765101930359073812}
   - component: {fileID: 8703155491058771827}
+  - component: {fileID: 3375904614216373472}
   m_Layer: 8
   m_Name: coconutFire
   m_TagString: Untagged
@@ -140,6 +141,19 @@ MonoBehaviour:
   countHitMonkey: 1
   countHitPlayer: 0
   countHitCoconut: 0
+--- !u!114 &3375904614216373472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041296640201687875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f49e011012677479f83e85d3f00878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireExplosion: {fileID: 5579091035428511373, guid: 9b6e880efa9bfb0429a0bab8f86d4859, type: 3}
 --- !u!1001 &2041296640045183018
 PrefabInstance:
   m_ObjectHideFlags: 0

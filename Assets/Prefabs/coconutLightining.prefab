@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4548750257638519124}
   - component: {fileID: 2205940818931543943}
   - component: {fileID: 553066185113987955}
+  - component: {fileID: 9060544682971564415}
   m_Layer: 8
   m_Name: coconutLightining
   m_TagString: Untagged
@@ -140,6 +141,19 @@ MonoBehaviour:
   countHitMonkey: 1
   countHitPlayer: 0
   countHitCoconut: 0
+--- !u!114 &9060544682971564415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5166695932574995272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794fa95755636474e92ef781b97bba6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightningBolt: {fileID: 6993469515773521826, guid: e25efb406e432774bb2b0d5adf259434, type: 3}
 --- !u!1001 &5166695933334238034
 PrefabInstance:
   m_ObjectHideFlags: 0
