@@ -21,7 +21,9 @@ public class PlayerController : MonoBehaviour
 	public float waitTime 	= 10.0f;
     private float timer 	= 0.0f;
 	
-    [Header("Component")]
+	public GameObject muzzleFlashPrefab;
+    
+	[Header("Component")]
     public GameObject coconutPrefab;
     public Transform launchPoint;
     public Transform pivotPoint;
@@ -168,6 +170,7 @@ public class PlayerController : MonoBehaviour
 
 		
 		if (powerUpFire){
+			Instantiate(muzzleFlashPrefab, launchPoint.position, launchPoint.rotation);
 			float speed = (launchSpeed - minLaunchSpeed) * speedPercent + minLaunchSpeed;
 			GameObject coconut = Instantiate(coconutFirePrefab);
 			coconut.transform.position = launchPoint.position;
@@ -178,6 +181,7 @@ public class PlayerController : MonoBehaviour
 		}
 		
 		if (powerUpLightning){
+			Instantiate(muzzleFlashPrefab,launchPoint.position, launchPoint.rotation);
 			float speed = (launchSpeed - minLaunchSpeed) * speedPercent + minLaunchSpeed +10;
 			GameObject coconut = Instantiate(coconutLightiningPrefab);
 			coconut.transform.position = launchPoint.position;
@@ -188,6 +192,7 @@ public class PlayerController : MonoBehaviour
 			
 		}
 		if (powerUpNull){
+			Instantiate(muzzleFlashPrefab, launchPoint.position, launchPoint.rotation);
 			float speed = (launchSpeed - minLaunchSpeed) * speedPercent + minLaunchSpeed +5;
 			GameObject coconut = Instantiate(coconutPrefab);
 			coconut.transform.position = launchPoint.position;

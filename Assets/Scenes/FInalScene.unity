@@ -565,6 +565,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2041296640201687875, guid: f54a37253cbabd845be18ed52b69b145, type: 3}
     - target: {fileID: 4541477431276586173, guid: d225419ef913fce479df244ee3f87b02, type: 3}
+      propertyPath: muzzleFlashPrefab
+      value: 
+      objectReference: {fileID: 7177991128484655659, guid: 266c348ffe0915f48b41b462af04436a, type: 3}
+    - target: {fileID: 4541477431276586173, guid: d225419ef913fce479df244ee3f87b02, type: 3}
       propertyPath: coconutLightiningPrefab
       value: 
       objectReference: {fileID: 5166695932574995272, guid: 416f70fd82ff7754a8ec1b25be23ed5c, type: 3}
